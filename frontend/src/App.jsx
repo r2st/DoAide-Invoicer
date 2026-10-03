@@ -14,11 +14,14 @@ import HsnLookupPage from "./pages/HsnLookupPage";
 import InvoiceDetailPage from "./pages/InvoiceDetailPage";
 import InvoiceListPage from "./pages/InvoiceListPage";
 import LandingPage from "./pages/LandingPage";
+import LateFeeCalculatorPage from "./pages/LateFeeCalculatorPage";
+import PaymentTermsPage from "./pages/PaymentTermsPage";
 import PricingPage from "./pages/PricingPage";
 import SettingsPage from "./pages/SettingsPage";
 import SitemapPage from "./pages/SitemapPage";
 import TemplateDetailPage from "./pages/TemplateDetailPage";
 import TemplatesPage from "./pages/TemplatesPage";
+import ToolsIndexPage from "./pages/ToolsIndexPage";
 import UploadPage from "./pages/UploadPage";
 import AuthCallbackPage from "./pages/AuthCallbackPage";
 
@@ -70,6 +73,9 @@ export default function App() {
       <Route path="/calculator" element={<CalculatorPage />} />
       <Route path="/templates" element={<TemplatesPage />} />
       <Route path="/template/:slug" element={<TemplateDetailPage />} />
+      <Route path="/tools" element={<ToolsIndexPage />} />
+      <Route path="/tools/payment-terms" element={<PaymentTermsPage />} />
+      <Route path="/tools/late-fee" element={<LateFeeCalculatorPage />} />
 
       {/* SEO & content pages */}
       <Route path="/blog" element={<BlogListPage />} />

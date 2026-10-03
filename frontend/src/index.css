@@ -252,6 +252,27 @@ a:focus-visible {
   outline-color: var(--ink);
 }
 
+/* ---- Tool page layout ---- */
+.tool-page { min-height: 100vh; background: var(--bg-canvas); }
+.tool-main { max-width: 780px; margin: 0 auto; padding: 2rem 1.25rem; }
+.tool-container { display: flex; flex-direction: column; gap: 1.5rem; }
+.tool-title { font-family: var(--display); font-size: clamp(24px, 4vw, 40px); font-weight: 700; color: var(--ink-strong); margin: 0; }
+.tool-subtitle { color: var(--ink-soft); font-size: 0.95rem; margin: 0; line-height: 1.6; }
+.tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+.tool-card { display: flex; flex-direction: column; gap: 0.25rem; padding: 1.25rem; border: 1px solid var(--line); border-radius: 12px; text-decoration: none; color: var(--ink); transition: border-color 0.15s, transform 0.15s; background: var(--bg-card); }
+.tool-card:hover { border-color: var(--brand); transform: translateY(-2px); }
+.tool-card-icon { font-size: 1.75rem; }
+.tool-card-title { font-size: 1rem; font-weight: 600; color: var(--ink-strong); margin: 0; }
+.tool-card-desc { font-size: 0.82rem; color: var(--ink-soft); margin: 0; }
+.calc-label { display: flex; flex-direction: column; gap: 0.35rem; font-size: 0.9rem; font-weight: 500; color: var(--ink); }
+.tools-nav { display: flex; align-items: center; gap: 1rem; padding: 0.75rem 1rem; border-bottom: 1px solid var(--line); background: var(--bg-canvas); flex-wrap: wrap; }
+.tools-nav-brand { font-weight: 700; color: var(--brand); text-decoration: none; font-size: 1rem; white-space: nowrap; }
+.tools-nav-brand em { font-style: italic; }
+.tools-nav-links { display: flex; gap: 0.5rem; flex-wrap: wrap; flex: 1; }
+.tools-nav-link { text-decoration: none; font-size: 0.85rem; padding: 0.35rem 0.75rem; border-radius: 6px; color: var(--ink-soft); transition: background 0.15s; }
+.tools-nav-link:hover, .tools-nav-link.active { background: var(--bg-card); color: var(--ink-strong); }
+.tools-nav-cta { margin-left: auto; font-size: 0.85rem; padding: 0.4rem 1rem; background: var(--brand); color: var(--brand-text); border-radius: 6px; font-weight: 600; text-decoration: none; white-space: nowrap; }
+
 @media (prefers-reduced-motion: reduce) {
   .skeleton { animation: none; }
   .spinner { animation-duration: 2.5s; }
