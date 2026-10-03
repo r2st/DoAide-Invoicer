@@ -4,11 +4,12 @@ import logging
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from starlette.middleware.sessions import SessionMiddleware
 
 import app.models  # noqa: F401
 from app.core.config import settings
 from app.core.database import check_database, engine
-from app.routers import auth, businesses, export, health, hsn, invoices, subscriptions, whatsapp
+from app.routers import auth, businesses, export, health, hsn, invoices, oauth, subscriptions, whatsapp
 
 logger = logging.getLogger(__name__)
 
@@ -29,9 +30,12 @@ def create_app() -> FastAPI:
         allow_headers=["*"],
     )
 
+    application.add_middleware(SessionMiddleware, secret_key=settings.jwt_secret)
+
     prefix = settings.api_v1_prefix
     application.include_router(health.router, prefix=prefix)
     application.include_router(auth.router, prefix=prefix)
+    application.include_router(oauth.router, prefix=prefix)
     application.include_router(export.router, prefix=prefix)
     application.include_router(invoices.router, prefix=prefix)
     application.include_router(businesses.router, prefix=prefix)

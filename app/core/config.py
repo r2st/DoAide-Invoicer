@@ -50,6 +50,15 @@ class Settings(BaseSettings):
     twilio_auth_token: str = ""
     twilio_whatsapp_number: str = ""
 
+    # OAuth / SSO
+    google_client_id: str = ""
+    google_client_secret: str = ""
+    github_client_id: str = ""
+    github_client_secret: str = ""
+    microsoft_client_id: str = ""
+    microsoft_client_secret: str = ""
+    oauth_redirect_base: str = "http://localhost:3010"
+
     # Uploads
     upload_dir: str = "./data/images"
     max_upload_mb: int = 20

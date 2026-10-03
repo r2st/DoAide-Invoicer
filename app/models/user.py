@@ -15,6 +15,8 @@ class User(Base, TimestampMixin):
     email: Mapped[str | None] = mapped_column(String(255), unique=True, nullable=True)
     hashed_password: Mapped[str | None] = mapped_column(String(255), nullable=True)
     name: Mapped[str | None] = mapped_column(String(255), nullable=True)
+    oauth_provider: Mapped[str | None] = mapped_column(String(50), nullable=True)
+    oauth_id: Mapped[str | None] = mapped_column(String(255), nullable=True)
     plan: Mapped[str] = mapped_column(String(20), default="free", nullable=False)
     gstin: Mapped[str | None] = mapped_column(String(15), nullable=True)
     state_code: Mapped[str | None] = mapped_column(String(2), nullable=True)

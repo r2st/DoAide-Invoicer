@@ -20,6 +20,7 @@ import SitemapPage from "./pages/SitemapPage";
 import TemplateDetailPage from "./pages/TemplateDetailPage";
 import TemplatesPage from "./pages/TemplatesPage";
 import UploadPage from "./pages/UploadPage";
+import AuthCallbackPage from "./pages/AuthCallbackPage";
 
 function Protected({ children }) {
   const { user, loading } = useAuth();
@@ -61,6 +62,7 @@ export default function App() {
   return (
     <Routes>
       <Route path="/login" element={<Navigate to="/" replace />} />
+      <Route path="/auth/callback" element={<AuthCallbackPage />} />
       <Route path="/" element={<Home />} />
 
       {/* Free tools — no login required */}
