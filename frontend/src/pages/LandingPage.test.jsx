@@ -38,7 +38,7 @@ describe("LandingPage", () => {
 
   it("renders auth form", () => {
     renderLanding();
-    expect(screen.getByText("Sign in")).toBeInTheDocument();
+    expect(screen.getAllByText("Sign in").length).toBeGreaterThanOrEqual(1);
     expect(screen.getByText("Create account")).toBeInTheDocument();
   });
 

@@ -20,6 +20,10 @@ keys/
 # Uploaded invoices and images
 data/
 
+# Node / Frontend
+node_modules/
+dist/
+
 # Editors / OS
 .DS_Store
 .idea/
