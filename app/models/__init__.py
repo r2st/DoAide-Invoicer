@@ -6,3 +6,4 @@ import app.models.hsn_code  # noqa: F401
 import app.models.processing_job  # noqa: F401
 import app.models.usage_tracking  # noqa: F401
 import app.models.whatsapp_session  # noqa: F401
+import app.models.subscription  # noqa: F401

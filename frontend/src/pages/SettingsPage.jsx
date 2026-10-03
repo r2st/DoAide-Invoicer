@@ -115,17 +115,27 @@ export default function SettingsPage() {
           <div className="panel">
             <h2 className="text-sm font-semibold uppercase tracking-wide text-ink-soft mb-4">Current Plan</h2>
             <div className="text-center">
-              <div className="text-2xl font-bold text-brand mb-1">{user?.plan === "pro" ? "Pro" : user?.plan === "ca" ? "CA" : "Free"}</div>
-              <p className="text-sm text-ink-soft mb-4">
-                {user?.invoice_count_this_month ?? 0} / {user?.plan === "pro" ? 500 : user?.plan === "ca" ? "∞" : 25} invoices used
-              </p>
-              <div className="w-full bg-canvas rounded-full h-2 mb-4">
-                <div
-                  className="h-full rounded-full bg-brand transition-all"
-                  style={{ width: `${Math.min(100, ((user?.invoice_count_this_month ?? 0) / (user?.plan === "pro" ? 500 : 25)) * 100)}%` }}
-                />
+              <div className="text-2xl font-bold text-brand mb-1">
+                {user?.plan === "enterprise" ? "Enterprise" : user?.plan === "pro" ? "Pro" : user?.plan === "ca" ? "CA" : "Free"}
               </div>
-              <a href="/pricing" className="btn btn-ghost text-sm w-full">Upgrade Plan</a>
+              <p className="text-sm text-ink-soft mb-4">
+                {user?.plan === "free"
+                  ? `${user?.invoice_count_this_month ?? 0} / 5 invoices used`
+                  : "Unlimited invoices"}
+              </p>
+              {user?.plan === "free" && (
+                <div className="w-full bg-canvas rounded-full h-2 mb-4">
+                  <div
+                    className="h-full rounded-full bg-brand transition-all"
+                    style={{ width: `${Math.min(100, ((user?.invoice_count_this_month ?? 0) / 5) * 100)}%` }}
+                  />
+                </div>
+              )}
+              {user?.plan === "free" ? (
+                <a href="/pricing" className="btn btn-primary text-sm w-full">Upgrade Plan</a>
+              ) : (
+                <a href="/pricing" className="btn btn-ghost text-sm w-full">Manage Plan</a>
+              )}
             </div>
           </div>
 

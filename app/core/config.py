@@ -55,7 +55,14 @@ class Settings(BaseSettings):
     max_upload_mb: int = 20
 
     # Free tier limits
-    free_tier_monthly_limit: int = 25
+    free_tier_monthly_limit: int = 5
+
+    # Razorpay
+    razorpay_key_id: str = ""
+    razorpay_key_secret: str = ""
+    razorpay_webhook_secret: str = ""
+    razorpay_plan_id_pro: str = ""
+    razorpay_plan_id_enterprise: str = ""
 
     @field_validator("environment")
     @classmethod

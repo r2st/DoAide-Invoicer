@@ -45,8 +45,22 @@ def increment_usage(db: Session, user_id: int) -> int:
     return usage.invoice_count
 
 
+PLAN_LIMITS = {
+    "free": None,
+    "pro": 0,
+    "enterprise": 0,
+    "ca": 0,
+}
+
+
+def get_plan_limit(plan: str) -> int:
+    if PLAN_LIMITS.get(plan, None) == 0:
+        return 0
+    return settings.free_tier_monthly_limit
+
+
 def check_quota(db: Session, user_id: int, plan: str) -> tuple[bool, int, int]:
-    if plan != "free":
+    if plan in ("pro", "enterprise", "ca"):
         return True, 0, 0
 
     limit = settings.free_tier_monthly_limit

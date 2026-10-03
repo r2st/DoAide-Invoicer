@@ -33,7 +33,7 @@ def test_check_quota_free_tier(db_session, test_user):
     allowed, used, limit = check_quota(db_session, user_id=test_user.id, plan="free")
     assert allowed is True
     assert used == 0
-    assert limit == 25
+    assert limit == 5
 
 
 def test_check_quota_pro_unlimited(db_session, test_user):

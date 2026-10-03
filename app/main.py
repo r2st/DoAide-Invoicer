@@ -8,7 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import app.models  # noqa: F401
 from app.core.config import settings
 from app.core.database import check_database, engine
-from app.routers import auth, businesses, export, health, hsn, invoices, whatsapp
+from app.routers import auth, businesses, export, health, hsn, invoices, subscriptions, whatsapp
 
 logger = logging.getLogger(__name__)
 
@@ -37,6 +37,7 @@ def create_app() -> FastAPI:
     application.include_router(businesses.router, prefix=prefix)
     application.include_router(whatsapp.router, prefix=prefix)
     application.include_router(hsn.router, prefix=prefix)
+    application.include_router(subscriptions.router, prefix=prefix)
 
     @application.get("/", include_in_schema=False)
     def root() -> dict:

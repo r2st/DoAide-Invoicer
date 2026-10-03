@@ -166,4 +166,10 @@ export const api = {
   addClient: (payload) => request("/clients", { method: "POST", body: payload }),
   updateClient: (id, payload) => request(`/clients/${id}`, { method: "PUT", body: payload }),
   deleteClient: (id) => request(`/clients/${id}`, { method: "DELETE" }),
+
+  subscriptionConfig: () => request("/subscriptions/config", { auth: false }),
+  createSubscription: (plan) => request("/subscriptions/create", { method: "POST", body: { plan } }),
+  verifySubscription: (payload) => request("/subscriptions/verify", { method: "POST", body: payload }),
+  subscriptionStatus: () => request("/subscriptions/status"),
+  cancelSubscription: () => request("/subscriptions/cancel", { method: "POST" }),
 };
