@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://invoicer.doaide.com/</loc><priority>1.0</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://invoicer.doaide.com/create</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://invoicer.doaide.com/calculator</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://invoicer.doaide.com/templates</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://invoicer.doaide.com/template/standard</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://invoicer.doaide.com/template/professional</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://invoicer.doaide.com/template/minimal</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://invoicer.doaide.com/template/creative</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://invoicer.doaide.com/template/gst-compliant</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://invoicer.doaide.com/template/international</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://invoicer.doaide.com/pricing</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://invoicer.doaide.com/blog</loc><priority>0.7</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://invoicer.doaide.com/blog/free-invoice-generator-india-2026</loc><priority>0.6</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://invoicer.doaide.com/blog/gst-invoice-format-guide</loc><priority>0.6</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://invoicer.doaide.com/blog/how-to-create-professional-invoices</loc><priority>0.6</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://invoicer.doaide.com/embed</loc><priority>0.5</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://invoicer.doaide.com/sitemap</loc><priority>0.3</priority><changefreq>monthly</changefreq></url>
+</urlset>

@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import AuthForm from "../components/AuthForm";
 import ThemeToggle from "../components/ThemeToggle";
 import { usePageTitle } from "../hooks/usePageTitle";
 
 const TYPEWRITER_LINES = [
-  "Send an invoice photo on WhatsApp",
-  "AI extracts vendor, GSTIN, line items",
-  "GST calculated, HSN codes matched",
-  "Export GST-ready data in seconds",
+  "Create a free invoice in 30 seconds",
+  "GST-compliant templates, zero signup",
+  "Download PDF, share via WhatsApp",
+  "Professional invoices for every business",
 ];
 
 function useTypewriter(lines, typingSpeed = 50, pauseMs = 2000) {
@@ -45,18 +46,20 @@ function useTypewriter(lines, typingSpeed = 50, pauseMs = 2000) {
   return text;
 }
 
-const FEATURES = [
-  { icon: "📱", title: "WhatsApp-First", desc: "Send a photo, get structured data" },
-  { icon: "🤖", title: "AI-Powered OCR", desc: "Auto-extract vendor, GSTIN, items" },
-  { icon: "📈", title: "GST-Ready", desc: "HSN codes + tax auto-calculated" },
-  { icon: "⚡", title: "30-Second Turnaround", desc: "From photo to structured invoice" },
+const TOOLS = [
+  { icon: "📄", title: "Invoice Generator", desc: "Create beautiful invoices instantly — no signup", to: "/create" },
+  { icon: "🧮", title: "Tax Calculator", desc: "GST/CGST/SGST/IGST breakdown calculator", to: "/calculator" },
+  { icon: "🎨", title: "Invoice Templates", desc: "6 free professional templates to choose from", to: "/templates" },
 ];
 
-const PRICING = [
-  { plan: "Free", price: "₹0", period: "/month", features: ["25 invoices/month", "WhatsApp processing", "Web dashboard"], cta: "Get Started" },
-  { plan: "Pro", price: "₹999", period: "/month", features: ["500 invoices/month", "Bulk upload & export", "Priority processing", "Full GST integration"], cta: "Start Pro", highlight: true },
-  { plan: "CA Plan", price: "₹2,999", period: "/month", features: ["Unlimited invoices", "Multi-client management", "API access", "Dedicated support"], cta: "Start CA Plan" },
+const FEATURES = [
+  { icon: "⚡", title: "30-Second Invoices", desc: "Fill in details, download PDF. That's it." },
+  { icon: "📱", title: "WhatsApp Sharing", desc: "Send invoices directly via WhatsApp" },
+  { icon: "📈", title: "GST-Ready", desc: "CGST, SGST, IGST — auto-calculated" },
+  { icon: "🆓", title: "Free Forever", desc: "No signup needed for basic invoicing" },
 ];
+
+const COUNTER = { value: "10,000+", label: "invoices generated" };
 
 export default function LandingPage() {
   usePageTitle(null);
@@ -78,10 +81,14 @@ export default function LandingPage() {
             DoAide <em className="text-brand">Invoicer</em>
           </span>
         </div>
-        <div className="ml-auto flex items-center gap-3">
-          <ThemeToggle />
+        <nav className="ml-auto flex items-center gap-4">
+          <Link to="/create" className="text-sm text-ink-soft hover:text-brand transition-colors hidden sm:inline">Create Invoice</Link>
+          <Link to="/templates" className="text-sm text-ink-soft hover:text-brand transition-colors hidden sm:inline">Templates</Link>
+          <Link to="/calculator" className="text-sm text-ink-soft hover:text-brand transition-colors hidden sm:inline">Calculator</Link>
+          <Link to="/blog" className="text-sm text-ink-soft hover:text-brand transition-colors hidden md:inline">Blog</Link>
           <a href="#pricing" className="text-sm text-ink-soft hover:text-brand transition-colors">Pricing</a>
-        </div>
+          <ThemeToggle />
+        </nav>
       </header>
 
       <section
@@ -90,13 +97,18 @@ export default function LandingPage() {
         style={{ animation: "fade-up 0.8s ease 0.2s both" }}
       >
         <div className="flex-1 min-w-0">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--glass-feature-bg)] border border-[var(--glass-feature-border)] text-sm text-brand mb-4">
+            <span className="font-mono font-bold">{COUNTER.value}</span>
+            <span className="text-ink-muted">{COUNTER.label}</span>
+          </div>
+
           <h1 className="font-display text-4xl lg:text-6xl font-normal leading-tight text-ink-strong mb-4">
-            Invoice photos to{" "}
-            <span className="text-brand italic">GST-ready data</span>
+            Create a Free Invoice{" "}
+            <span className="text-brand italic">in 30 Seconds</span>
           </h1>
-          <p className="font-mono text-sm text-ink-muted leading-relaxed mb-6 max-w-lg">
-            Send invoice photos on WhatsApp. AI extracts every field — vendor, GSTIN,
-            line items, HSN codes — calculates GST, and feeds it into your filing workflow.
+          <p className="text-ink-soft leading-relaxed mb-6 max-w-lg">
+            Professional, GST-compliant invoices with zero signup. Fill in your details, download PDF,
+            and share via WhatsApp — completely free.
           </p>
 
           <div className="min-h-[28px] mb-8">
@@ -106,27 +118,28 @@ export default function LandingPage() {
             </span>
           </div>
 
-          <div className="flex flex-wrap gap-3 mb-6">
-            <a
-              href="https://wa.me/919876543210?text=Hi"
-              className="btn btn-whatsapp text-base px-6 py-3"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-              </svg>
-              Start on WhatsApp
-            </a>
+          <div className="flex flex-wrap gap-3 mb-8">
+            <Link to="/create" className="btn btn-primary text-base px-6 py-3">
+              Create Free Invoice
+            </Link>
             <a href="#auth" className="btn btn-ghost text-sm">
               Open Dashboard
             </a>
           </div>
 
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8">
+            {TOOLS.map((tool) => (
+              <Link key={tool.title} to={tool.to} className="flex flex-col gap-1 px-4 py-3 border border-[var(--glass-feature-border)] rounded-[var(--radius)] bg-[var(--glass-feature-bg)] text-sm hover:border-brand/40 transition-colors group">
+                <strong className="text-brand text-sm">{tool.icon} {tool.title}</strong>
+                <span className="text-ink-muted text-xs">{tool.desc}</span>
+              </Link>
+            ))}
+          </div>
+
           <div className="flex flex-wrap gap-3">
             {FEATURES.map((f) => (
-              <div key={f.title} className="flex flex-col gap-0.5 px-3 py-2.5 border border-[var(--glass-feature-border)] rounded-[var(--radius)] bg-[var(--glass-feature-bg)] text-sm">
-                <strong className="text-brand text-sm">{f.icon} {f.title}</strong>
+              <div key={f.title} className="flex flex-col gap-0.5 px-3 py-2.5 border border-line rounded-[var(--radius)] bg-surface text-sm">
+                <strong className="text-ink-strong text-sm">{f.icon} {f.title}</strong>
                 <span className="text-ink-muted text-xs">{f.desc}</span>
               </div>
             ))}
@@ -138,14 +151,43 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section id="pricing" className="max-w-7xl w-full mx-auto px-5 py-16">
-        <h2 className="font-display text-3xl text-center text-ink-strong mb-10">Simple, transparent pricing</h2>
+      <section className="max-w-7xl w-full mx-auto px-5 py-16">
+        <h2 className="font-display text-3xl text-center text-ink-strong mb-3">How It Works</h2>
+        <p className="text-center text-ink-soft mb-10 max-w-md mx-auto text-sm">Three steps to a professional invoice. No account needed.</p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {PRICING.map((p) => (
+          {[
+            { step: "1", title: "Fill in details", desc: "Enter your business name, client info, and line items with amounts." },
+            { step: "2", title: "Review & customize", desc: "Preview your invoice, choose a template, and verify the tax breakdown." },
+            { step: "3", title: "Download & share", desc: "Download as PDF or send directly via WhatsApp. Done in 30 seconds." },
+          ].map((s) => (
+            <div key={s.step} className="panel text-center">
+              <div className="w-10 h-10 rounded-full bg-brand text-brand-text font-bold text-lg flex items-center justify-center mx-auto mb-3">{s.step}</div>
+              <h3 className="font-semibold text-ink-strong mb-1">{s.title}</h3>
+              <p className="text-sm text-ink-soft">{s.desc}</p>
+            </div>
+          ))}
+        </div>
+        <div className="text-center mt-8">
+          <Link to="/create" className="btn btn-primary text-base px-8 py-3">Get Started — It's Free</Link>
+        </div>
+      </section>
+
+      <section id="pricing" className="max-w-7xl w-full mx-auto px-5 py-16">
+        <h2 className="font-display text-3xl text-center text-ink-strong mb-3">Simple, transparent pricing</h2>
+        <p className="text-center text-ink-soft mb-10 text-sm">Free tools for everyone. Pro features when you need them.</p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {[
+            { plan: "Free", price: "₹0", period: "/forever", features: ["5 invoices/month", "All templates", "PDF download", "WhatsApp sharing", "Tax calculator"], cta: "Start Free", to: "/create", highlight: false },
+            { plan: "Pro", price: "₹349", period: "/month", features: ["Unlimited invoices", "Custom branding", "Recurring invoices", "Payment tracking", "Email & WhatsApp delivery"], cta: "Upgrade to Pro", to: "/pricing", highlight: true },
+            { plan: "Enterprise", price: "₹999", period: "/month", features: ["Everything in Pro", "API access", "Bulk invoicing", "Team accounts", "GST integration"], cta: "Upgrade", to: "/pricing", highlight: false },
+          ].map((p) => (
             <div
               key={p.plan}
-              className={`panel text-center ${p.highlight ? "border-brand ring-1 ring-brand" : ""}`}
+              className={`panel text-center ${p.highlight ? "border-brand ring-1 ring-brand relative" : ""}`}
             >
+              {p.highlight && (
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand text-brand-text text-xs font-semibold px-3 py-1 rounded-full">Most Popular</div>
+              )}
               <h3 className="text-lg font-semibold mb-1">{p.plan}</h3>
               <div className="text-3xl font-bold text-brand mb-1">{p.price}<span className="text-sm font-normal text-ink-soft">{p.period}</span></div>
               <ul className="text-sm text-ink-soft space-y-2 my-6 text-left">
@@ -156,19 +198,51 @@ export default function LandingPage() {
                   </li>
                 ))}
               </ul>
-              <button type="button" className={`btn w-full ${p.highlight ? "btn-primary" : "btn-ghost"}`}>
-                {p.cta}
-              </button>
+              <Link to={p.to} className={`btn w-full ${p.highlight ? "btn-primary" : "btn-ghost"}`}>{p.cta}</Link>
             </div>
           ))}
         </div>
       </section>
 
-      <footer className="border-t border-[var(--glass-tab-border)] mt-auto py-6 px-5">
-        <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-ink-muted">
-          <a href="https://doaide.com" className="hover:text-brand transition-colors">DoAide</a>
-          <a href="https://gst.doaide.com" className="hover:text-brand transition-colors">DoAide GST</a>
-          <span>&copy; {new Date().getFullYear()} DoAide. All rights reserved.</span>
+      <footer className="border-t border-[var(--glass-tab-border)] mt-auto py-8 px-5">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-6">
+            <div>
+              <h4 className="text-sm font-semibold text-ink-strong mb-2">Free Tools</h4>
+              <div className="flex flex-col gap-1">
+                <Link to="/create" className="text-xs text-ink-soft hover:text-brand transition-colors">Invoice Generator</Link>
+                <Link to="/calculator" className="text-xs text-ink-soft hover:text-brand transition-colors">Tax Calculator</Link>
+                <Link to="/templates" className="text-xs text-ink-soft hover:text-brand transition-colors">Templates</Link>
+              </div>
+            </div>
+            <div>
+              <h4 className="text-sm font-semibold text-ink-strong mb-2">Resources</h4>
+              <div className="flex flex-col gap-1">
+                <Link to="/blog" className="text-xs text-ink-soft hover:text-brand transition-colors">Blog</Link>
+                <Link to="/pricing" className="text-xs text-ink-soft hover:text-brand transition-colors">Pricing</Link>
+                <Link to="/embed" className="text-xs text-ink-soft hover:text-brand transition-colors">Embed Widget</Link>
+              </div>
+            </div>
+            <div>
+              <h4 className="text-sm font-semibold text-ink-strong mb-2">Templates</h4>
+              <div className="flex flex-col gap-1">
+                <Link to="/template/professional" className="text-xs text-ink-soft hover:text-brand transition-colors">Professional</Link>
+                <Link to="/template/gst-compliant" className="text-xs text-ink-soft hover:text-brand transition-colors">GST Compliant</Link>
+                <Link to="/template/minimal" className="text-xs text-ink-soft hover:text-brand transition-colors">Minimal</Link>
+              </div>
+            </div>
+            <div>
+              <h4 className="text-sm font-semibold text-ink-strong mb-2">DoAide</h4>
+              <div className="flex flex-col gap-1">
+                <a href="https://doaide.com" className="text-xs text-ink-soft hover:text-brand transition-colors">DoAide Home</a>
+                <a href="https://gst.doaide.com" className="text-xs text-ink-soft hover:text-brand transition-colors">DoAide GST</a>
+                <Link to="/sitemap" className="text-xs text-ink-soft hover:text-brand transition-colors">Sitemap</Link>
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-ink-muted pt-4 border-t border-line">
+            <span>&copy; {new Date().getFullYear()} DoAide. All rights reserved.</span>
+          </div>
         </div>
       </footer>
     </div>

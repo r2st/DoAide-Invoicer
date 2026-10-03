@@ -23,12 +23,12 @@ function renderLanding() {
 describe("LandingPage", () => {
   it("renders the headline", () => {
     renderLanding();
-    expect(screen.getByText(/Invoice photos to/)).toBeInTheDocument();
+    expect(screen.getByText(/Create a Free Invoice/)).toBeInTheDocument();
   });
 
-  it("renders the WhatsApp CTA", () => {
+  it("renders the primary CTA", () => {
     renderLanding();
-    expect(screen.getByText("Start on WhatsApp")).toBeInTheDocument();
+    expect(screen.getAllByText("Create Free Invoice").length).toBeGreaterThanOrEqual(1);
   });
 
   it("renders pricing section", () => {
@@ -42,9 +42,27 @@ describe("LandingPage", () => {
     expect(screen.getByText("Create account")).toBeInTheDocument();
   });
 
-  it("renders feature cards", () => {
+  it("renders free tools section", () => {
     renderLanding();
-    expect(screen.getByText(/WhatsApp-First/)).toBeInTheDocument();
-    expect(screen.getByText(/AI-Powered OCR/)).toBeInTheDocument();
+    expect(screen.getAllByText(/Invoice Generator/).length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText(/Tax Calculator/).length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText(/Invoice Templates/).length).toBeGreaterThanOrEqual(1);
+  });
+
+  it("renders how it works section", () => {
+    renderLanding();
+    expect(screen.getByText("How It Works")).toBeInTheDocument();
+    expect(screen.getByText("Fill in details")).toBeInTheDocument();
+  });
+
+  it("renders invoices generated counter", () => {
+    renderLanding();
+    expect(screen.getByText("10,000+")).toBeInTheDocument();
+  });
+
+  it("renders footer with navigation links", () => {
+    renderLanding();
+    expect(screen.getByText("Free Tools")).toBeInTheDocument();
+    expect(screen.getByText("Resources")).toBeInTheDocument();
   });
 });
