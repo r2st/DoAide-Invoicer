@@ -31,6 +31,13 @@ export const BLOG_POSTS = [
     date: "2026-10-01",
     readTime: "6 min read",
   },
+  {
+    slug: "gst-invoice-vs-regular-invoice",
+    title: "GST Invoice vs Regular Invoice: What Indian Businesses Need to Know",
+    excerpt: "Understand the key differences between GST tax invoices and regular invoices — mandatory fields, legal validity, input tax credit eligibility, and when to use each type.",
+    date: "2026-10-05",
+    readTime: "8 min read",
+  },
 ];
 
 export default function BlogListPage() {

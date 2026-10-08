@@ -14,6 +14,15 @@ if (globalThis.localStorage === undefined) {
   }
 }
 
+if (typeof globalThis.IntersectionObserver === "undefined") {
+  globalThis.IntersectionObserver = class {
+    constructor(cb) { this._cb = cb; }
+    observe() { this._cb([{ isIntersecting: true }]); }
+    unobserve() {}
+    disconnect() {}
+  };
+}
+
 Object.defineProperty(window, "matchMedia", {
   writable: true,
   value: (query) => ({

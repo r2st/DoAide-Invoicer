@@ -190,6 +190,58 @@ const CONTENT = {
       },
     ],
   },
+  "gst-invoice-vs-regular-invoice": {
+    sections: [
+      {
+        heading: "What is a Regular Invoice?",
+        body: "A regular invoice — also called a commercial invoice, proforma invoice, or bill — is a basic payment document that records a transaction between a seller and a buyer. It typically includes the seller's and buyer's details, a description of goods or services, quantities, rates, and the total amount due. Regular invoices are used by unregistered businesses, businesses under the GST composition scheme, or for informal transactions where GST compliance is not required.",
+      },
+      {
+        heading: "What is a GST Invoice?",
+        body: "A GST invoice (also called a tax invoice) is a legally mandated document issued by GST-registered businesses for taxable supplies. It must include specific fields defined under the Central Goods and Services Tax (CGST) Act, 2017. A valid GST invoice is essential for claiming Input Tax Credit (ITC), filing GST returns, and maintaining compliance. Without a properly formatted GST invoice, the buyer cannot claim ITC, which increases their effective cost.",
+        list: [
+          "Supplier and recipient GSTIN (Goods and Services Tax Identification Number)",
+          "Sequential invoice number (unique, max 16 characters per financial year)",
+          "Date of issue and place of supply",
+          "HSN code (for goods) or SAC code (for services)",
+          "Detailed tax breakdowns — CGST, SGST for intra-state or IGST for inter-state",
+          "Total taxable value, tax amount, and invoice total",
+          "Digital or physical signature of the supplier",
+        ],
+      },
+      {
+        heading: "Key Differences: GST Invoice vs Regular Invoice",
+        body: "Understanding these differences is critical for compliance, tax filing, and financial planning:",
+        list: [
+          "Legal validity — GST invoices are legally required under GST law for all taxable supplies by registered dealers. Regular invoices have no specific legal format requirement.",
+          "GSTIN fields — GST invoices must include both supplier and recipient GSTIN (for B2B). Regular invoices do not include GSTIN.",
+          "Tax breakdowns — GST invoices show separate CGST, SGST, or IGST amounts at applicable rates. Regular invoices may show a lump-sum total without tax details.",
+          "HSN/SAC codes — Mandatory on GST invoices for businesses above the prescribed turnover threshold. Not required on regular invoices.",
+          "Place of supply — GST invoices must specify place of supply (determines CGST+SGST vs IGST). Regular invoices do not track this.",
+          "Input Tax Credit — Only GST invoices allow the buyer to claim ITC. Purchases made against regular invoices cannot be used for ITC claims.",
+          "Who issues which — GST-registered businesses must issue GST invoices. Unregistered businesses, composition scheme dealers, and businesses selling exempt goods issue regular invoices or bills of supply.",
+          "E-invoicing — Businesses with turnover above ₹5 crore must generate e-invoices through the GST portal (IRN). This applies only to GST invoices.",
+        ],
+      },
+      {
+        heading: "When to Use Each Type",
+        body: "The type of invoice you issue depends on your GST registration status and the nature of the transaction:",
+        list: [
+          "GST-registered businesses (regular scheme) — must issue GST tax invoices for all taxable supplies, both B2B and B2C",
+          "Composition scheme businesses — issue a Bill of Supply instead of a tax invoice (cannot charge or show GST separately)",
+          "Unregistered businesses — issue regular invoices without GST fields (buyer cannot claim ITC)",
+          "Export invoices — GST-registered exporters issue tax invoices with IGST at 0% (zero-rated supply) or under Letter of Undertaking (LUT)",
+          "Proforma invoices — used as quotations or estimates before the actual transaction; not valid for GST compliance or ITC claims",
+          "Credit and debit notes — issued to adjust previously issued GST invoices (for returns, price changes, or corrections)",
+        ],
+      },
+      {
+        heading: "How to Create a GST-Compliant Invoice",
+        body: "The easiest way to ensure your invoices meet all GST requirements is to use a purpose-built template. DoAide Invoicer's GST Compliant template includes every mandatory field — GSTIN, HSN/SAC codes, place of supply, and automatic CGST/SGST/IGST calculation. Just fill in your details, and the template handles the compliance. Create your first GST invoice in 30 seconds — free, no signup required.",
+        cta: { text: "Create GST Invoice Now", to: "/create?template=gst-compliant" },
+      },
+    ],
+  },
 };
 
 export default function BlogPostPage() {

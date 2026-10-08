@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router-dom";
 import { AuthContext } from "../hooks/useAuth";
 import { PageTitleProvider } from "../hooks/usePageTitle";
@@ -57,12 +58,35 @@ describe("LandingPage", () => {
 
   it("renders invoices generated counter", () => {
     renderLanding();
-    expect(screen.getByText("10,000+")).toBeInTheDocument();
+    expect(screen.getByText("invoices generated")).toBeInTheDocument();
   });
 
   it("renders footer with navigation links", () => {
     renderLanding();
     expect(screen.getByText("Free Tools")).toBeInTheDocument();
     expect(screen.getByText("Resources")).toBeInTheDocument();
+  });
+
+  it("renders FAQ section", () => {
+    renderLanding();
+    expect(screen.getByText("Frequently Asked Questions")).toBeInTheDocument();
+    expect(screen.getByText("Is DoAide Invoicer free to use?")).toBeInTheDocument();
+    expect(screen.getByText("Are the invoices GST-compliant?")).toBeInTheDocument();
+  });
+
+  it("toggles FAQ accordion", async () => {
+    renderLanding();
+    const user = userEvent.setup();
+    const faqButton = screen.getByText("Is DoAide Invoicer free to use?");
+    await user.click(faqButton);
+    expect(screen.getByText(/Creating invoices, downloading PDFs/)).toBeInTheDocument();
+  });
+
+  it("renders GST comparison link in FAQ", async () => {
+    renderLanding();
+    const user = userEvent.setup();
+    const faqButton = screen.getByText(/difference between GST/);
+    await user.click(faqButton);
+    expect(screen.getByText(/Read our detailed comparison guide/)).toBeInTheDocument();
   });
 });

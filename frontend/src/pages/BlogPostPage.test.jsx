@@ -65,4 +65,15 @@ describe("BlogPostPage", () => {
     renderPost("free-invoice-generator-india-2026");
     expect(screen.getByText("Create Your Free Invoice Now")).toBeInTheDocument();
   });
+
+  it("renders GST vs Regular Invoice blog post", () => {
+    renderPost("gst-invoice-vs-regular-invoice");
+    expect(screen.getByText("GST Invoice vs Regular Invoice: What Indian Businesses Need to Know")).toBeInTheDocument();
+    expect(screen.getByText("What is a Regular Invoice?")).toBeInTheDocument();
+    expect(screen.getByText("What is a GST Invoice?")).toBeInTheDocument();
+    expect(screen.getByText(/Key Differences/)).toBeInTheDocument();
+    expect(screen.getByText("When to Use Each Type")).toBeInTheDocument();
+    expect(screen.getByText("How to Create a GST-Compliant Invoice")).toBeInTheDocument();
+    expect(screen.getByText("Create GST Invoice Now")).toBeInTheDocument();
+  });
 });

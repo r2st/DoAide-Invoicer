@@ -59,7 +59,95 @@ const FEATURES = [
   { icon: "🆓", title: "Free Forever", desc: "No signup needed for basic invoicing" },
 ];
 
-const COUNTER = { value: "10,000+", label: "invoices generated" };
+const COUNTER_TARGET = 12500;
+
+const FAQ_ITEMS = [
+  { q: "Is DoAide Invoicer free to use?", a: "Yes. Creating invoices, downloading PDFs, and sharing via WhatsApp is completely free with no signup required. Pro plans add features like recurring invoices and custom branding." },
+  { q: "Are the invoices GST-compliant?", a: "Yes. All invoice templates include mandatory GST fields including GSTIN, HSN/SAC codes, and automatic CGST/SGST/IGST calculation based on place of supply." },
+  { q: "Can I send invoices via WhatsApp?", a: "Yes. After generating your invoice PDF, you can share it directly via WhatsApp with one click. This is one of the most popular invoice delivery methods for Indian businesses." },
+  { q: "What's the difference between GST invoice and regular invoice?", a: "A GST invoice includes mandatory fields like GSTIN, HSN/SAC codes, and tax breakdowns required under GST law. Regular invoices lack these fields. Without a GST invoice, the buyer cannot claim Input Tax Credit." },
+  { q: "How many invoice templates are available?", a: "6 free templates: Standard, Professional, Minimal, Creative, GST Compliant, and International. Each template includes all mandatory fields for Indian businesses." },
+];
+
+function AnimatedCounter({ target, suffix = "+" }) {
+  const [count, setCount] = useState(0);
+  const [started, setStarted] = useState(false);
+  const [done, setDone] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setStarted(true); observer.disconnect(); } },
+      { threshold: 0.3 },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!started) return;
+    const duration = 1500;
+    const steps = 40;
+    const increment = target / steps;
+    let current = 0;
+    const interval = setInterval(() => {
+      current += increment;
+      if (current >= target) {
+        setCount(target);
+        setDone(true);
+        clearInterval(interval);
+      } else {
+        setCount(Math.floor(current));
+      }
+    }, duration / steps);
+    return () => clearInterval(interval);
+  }, [started, target]);
+
+  const formatted = count.toLocaleString("en-IN");
+  return (
+    <span ref={ref} className={`font-mono font-bold ${done ? "animate-pulse" : ""}`} style={{ animationIterationCount: done ? 2 : 0 }}>
+      {formatted}{suffix}
+    </span>
+  );
+}
+
+function FaqSection() {
+  const [openIndex, setOpenIndex] = useState(null);
+  return (
+    <section className="max-w-3xl mx-auto px-5 py-16" aria-labelledby="faq-heading">
+      <h2 id="faq-heading" className="font-display text-3xl text-center text-ink-strong mb-3">Frequently Asked Questions</h2>
+      <p className="text-center text-ink-soft mb-8 text-sm">Everything you need to know about DoAide Invoicer.</p>
+      <dl className="space-y-3">
+        {FAQ_ITEMS.map((item, i) => (
+          <div key={i} className="border border-line rounded-[var(--radius)] overflow-hidden">
+            <dt>
+              <button
+                className="w-full flex items-center justify-between px-5 py-4 text-left text-sm font-medium text-ink-strong hover:bg-surface-hover transition-colors"
+                aria-expanded={openIndex === i}
+                onClick={() => setOpenIndex(openIndex === i ? null : i)}
+              >
+                {item.q}
+                <span className="ml-3 flex-shrink-0 text-ink-muted" aria-hidden="true">{openIndex === i ? "−" : "+"}</span>
+              </button>
+            </dt>
+            {openIndex === i && (
+              <dd className="px-5 pb-4 text-sm text-ink-soft leading-relaxed">
+                {item.a}
+                {item.q.includes("difference between GST") && (
+                  <Link to="/blog/gst-invoice-vs-regular-invoice" className="block mt-2 text-brand text-sm font-medium hover:underline">
+                    Read our detailed comparison guide →
+                  </Link>
+                )}
+              </dd>
+            )}
+          </div>
+        ))}
+      </dl>
+    </section>
+  );
+}
 
 function ReferralBanner() {
   const [copied, setCopied] = useState(false);
@@ -129,8 +217,8 @@ export default function LandingPage() {
       >
         <div className="flex-1 min-w-0">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--glass-feature-bg)] border border-[var(--glass-feature-border)] text-sm text-brand mb-4">
-            <span className="font-mono font-bold">{COUNTER.value}</span>
-            <span className="text-ink-muted">{COUNTER.label}</span>
+            <AnimatedCounter target={COUNTER_TARGET} />
+            <span className="text-ink-muted">invoices generated</span>
           </div>
 
           <h1 className="font-display text-4xl lg:text-6xl font-normal leading-tight text-ink-strong mb-4">
@@ -235,6 +323,7 @@ export default function LandingPage() {
         </div>
       </section>
 
+      <FaqSection />
       <ReferralBanner />
 
       <footer className="border-t border-[var(--glass-tab-border)] mt-auto py-8 px-5">
@@ -256,6 +345,7 @@ export default function LandingPage() {
                 <Link to="/embed" className="text-xs text-ink-soft hover:text-brand transition-colors">Embed Widget</Link>
                 <Link to="/blog/gst-invoice-format-guide" className="text-xs text-ink-soft hover:text-brand transition-colors">GST Invoice Guide</Link>
                 <Link to="/blog/how-to-send-invoices-india" className="text-xs text-ink-soft hover:text-brand transition-colors">Sending Invoices Guide</Link>
+                <Link to="/blog/gst-invoice-vs-regular-invoice" className="text-xs text-ink-soft hover:text-brand transition-colors">GST vs Regular Invoice</Link>
               </div>
             </div>
             <div>

@@ -36,7 +36,7 @@ describe("BlogListPage", () => {
 
   it("renders read more links", () => {
     renderBlog();
-    expect(screen.getAllByText("Read more →")).toHaveLength(3);
+    expect(screen.getAllByText("Read more →")).toHaveLength(BLOG_POSTS.length);
   });
 
   it("renders read time", () => {
@@ -50,8 +50,14 @@ describe("BlogListPage", () => {
   });
 
   it("exports BLOG_POSTS array", () => {
-    expect(BLOG_POSTS).toHaveLength(3);
+    expect(BLOG_POSTS).toHaveLength(5);
     expect(BLOG_POSTS[0]).toHaveProperty("slug");
     expect(BLOG_POSTS[0]).toHaveProperty("title");
+  });
+
+  it("includes GST vs Regular Invoice post", () => {
+    const gstPost = BLOG_POSTS.find((p) => p.slug === "gst-invoice-vs-regular-invoice");
+    expect(gstPost).toBeTruthy();
+    expect(gstPost.title).toContain("GST Invoice vs Regular Invoice");
   });
 });
