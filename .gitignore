@@ -12,8 +12,7 @@ coverage.xml
 htmlcov/
 
 # Environment / secrets
-.env
-.env.*
+.env*
 !.env.example
 keys/
 
