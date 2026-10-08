@@ -61,6 +61,37 @@ const FEATURES = [
 
 const COUNTER = { value: "10,000+", label: "invoices generated" };
 
+function ReferralBanner() {
+  const [copied, setCopied] = useState(false);
+  const url = "https://invoice.doaide.com/?ref=invite";
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch { /* ignore */ }
+  };
+  return (
+    <section className="max-w-xl mx-auto px-5 py-10 text-center">
+      <div className="panel bg-[var(--glass-feature-bg)] border-[var(--glass-feature-border)]">
+        <h2 className="font-display text-2xl text-ink-strong mb-2">Share with Your CA or Accountant</h2>
+        <p className="text-sm text-ink-soft mb-4">Share DoAide Invoicer with your accounting team — they can create and manage invoices in one place.</p>
+        <div className="flex gap-3 justify-center flex-wrap">
+          <a
+            href={`https://wa.me/?text=${encodeURIComponent("Check out DoAide Invoicer — free GST invoice generator for Indian businesses: " + url)}`}
+            target="_blank" rel="noopener noreferrer" className="btn btn-primary"
+          >
+            Share on WhatsApp
+          </a>
+          <button onClick={handleCopy} className="btn btn-ghost">
+            {copied ? "Link copied!" : "Copy invite link"}
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function LandingPage() {
   usePageTitle(null);
   const typed = useTypewriter(TYPEWRITER_LINES);
@@ -204,6 +235,8 @@ export default function LandingPage() {
         </div>
       </section>
 
+      <ReferralBanner />
+
       <footer className="border-t border-[var(--glass-tab-border)] mt-auto py-8 px-5">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-6">
@@ -221,6 +254,8 @@ export default function LandingPage() {
                 <Link to="/blog" className="text-xs text-ink-soft hover:text-brand transition-colors">Blog</Link>
                 <Link to="/pricing" className="text-xs text-ink-soft hover:text-brand transition-colors">Pricing</Link>
                 <Link to="/embed" className="text-xs text-ink-soft hover:text-brand transition-colors">Embed Widget</Link>
+                <Link to="/blog/gst-invoice-format-guide" className="text-xs text-ink-soft hover:text-brand transition-colors">GST Invoice Guide</Link>
+                <Link to="/blog/how-to-send-invoices-india" className="text-xs text-ink-soft hover:text-brand transition-colors">Sending Invoices Guide</Link>
               </div>
             </div>
             <div>

@@ -24,6 +24,13 @@ export const BLOG_POSTS = [
     date: "2026-08-20",
     readTime: "6 min read",
   },
+  {
+    slug: "how-to-send-invoices-india",
+    title: "How to Send Invoices in India: Complete Guide",
+    excerpt: "Learn the best ways to send invoices to clients in India — email, WhatsApp, and digital platforms. Covers GST compliance, payment follow-ups, and tips to get paid faster.",
+    date: "2026-10-01",
+    readTime: "6 min read",
+  },
 ];
 
 export default function BlogListPage() {

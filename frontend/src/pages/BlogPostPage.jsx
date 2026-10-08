@@ -91,6 +91,54 @@ const CONTENT = {
       },
     ],
   },
+  "how-to-send-invoices-india": {
+    sections: [
+      {
+        heading: "Why How You Send Invoices Matters",
+        body: "Sending an invoice is more than attaching a PDF to an email. In India, where businesses rely heavily on WhatsApp and mobile communication, choosing the right delivery method can mean the difference between getting paid in 7 days versus 45. A well-delivered invoice reaches the right person, in the right format, at the right time — making it easy for your client to process and pay.",
+      },
+      {
+        heading: "Best Ways to Send Invoices in India",
+        body: "Indian businesses have several effective channels for invoice delivery. Choose based on your client's preferences and the formality of the relationship:",
+        list: [
+          "Email — the standard for B2B invoicing. Use a clear subject line: 'Invoice #INV-001 from [Your Business] — Due [Date]'. Attach the PDF and include a brief body with the total amount and payment details.",
+          "WhatsApp — increasingly popular for SME invoicing in India. Send the PDF directly in chat with a polite message. WhatsApp Business API allows automated invoice delivery.",
+          "Invoice management platforms — tools like DoAide Invoicer generate and send invoices in one step, with tracking to see when clients view them.",
+          "Physical delivery — still required for some government contracts and large enterprises. Use registered post or courier for important invoices.",
+          "Client portals — large companies like TCS, Infosys, and Wipro require invoice submission through their vendor portals (SAP Ariba, Coupa).",
+        ],
+      },
+      {
+        heading: "GST Compliance When Sending Invoices",
+        body: "Every invoice you send must comply with GST regulations, regardless of the delivery method. Key compliance points:",
+        list: [
+          "Include all mandatory fields — supplier GSTIN, recipient GSTIN (B2B), HSN/SAC codes, tax breakdowns",
+          "Issue invoices within the prescribed time — for goods, before or at the time of delivery; for services, within 30 days of service completion",
+          "Maintain sequential invoice numbering — gaps in numbering can trigger compliance queries",
+          "Keep digital copies for 6 years — the GST Act requires records to be maintained for 72 months",
+          "E-invoicing is mandatory for businesses with turnover above ₹5 crore — generate IRN through the GST portal",
+        ],
+      },
+      {
+        heading: "Tips to Get Paid Faster",
+        body: "Indian businesses often face delayed payments. These practices significantly reduce payment cycles:",
+        list: [
+          "Send invoices immediately after delivery — don't wait until month-end",
+          "Include payment instructions on the invoice — UPI ID, bank account, or payment link",
+          "Set clear payment terms — Net 15 gets you paid faster than Net 30",
+          "Send a polite reminder 3 days before the due date via WhatsApp",
+          "Follow up on Day 1 after the due date — a short message works better than a formal email",
+          "Offer early payment discounts — '2% discount if paid within 7 days' motivates faster payment",
+          "Use read receipts — platforms that track when your invoice is viewed help you time follow-ups",
+        ],
+      },
+      {
+        heading: "Send Your First Invoice Now",
+        body: "DoAide Invoicer makes it easy to create and send professional, GST-compliant invoices. Generate your invoice in 30 seconds, download the PDF, and share it via WhatsApp or email — completely free, no signup required.",
+        cta: { text: "Create & Send Your Invoice", to: "/create" },
+      },
+    ],
+  },
   "how-to-create-professional-invoices": {
     sections: [
       {
