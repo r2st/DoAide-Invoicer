@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import ErrorBoundary from "./components/ErrorBoundary";
+import FeedbackWidget from "./components/FeedbackWidget";
 import Shell from "./components/Shell";
 import { SkeletonPanel } from "./components/Skeleton";
 import { useAuth } from "./hooks/useAuth";
@@ -65,6 +66,8 @@ function Home() {
 
 export default function App() {
   return (
+    <>
+    <FeedbackWidget />
     <Routes>
       <Route path="/login" element={<Navigate to="/" replace />} />
       <Route path="/auth/callback" element={<AuthCallbackPage />} />
@@ -97,5 +100,6 @@ export default function App() {
       <Route path="/pricing" element={<PricingPage />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
+    </>
   );
 }
