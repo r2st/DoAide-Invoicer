@@ -38,6 +38,20 @@ export const BLOG_POSTS = [
     date: "2026-10-05",
     readTime: "8 min read",
   },
+  {
+    slug: "input-tax-credit-guide-india",
+    title: "Input Tax Credit (ITC) Under GST: Complete Guide for Indian Businesses",
+    excerpt: "Learn how to claim Input Tax Credit under GST — eligibility conditions, required documents, common mistakes, and step-by-step process to maximize your ITC claims.",
+    date: "2026-10-08",
+    readTime: "7 min read",
+  },
+  {
+    slug: "invoice-payment-terms-best-practices",
+    title: "Invoice Payment Terms: Best Practices to Get Paid Faster in India",
+    excerpt: "Discover the most effective payment terms for Indian businesses — Net 30 vs Net 15, early payment discounts, late fees, and strategies that reduce your average collection period.",
+    date: "2026-10-10",
+    readTime: "6 min read",
+  },
 ];
 
 export default function BlogListPage() {

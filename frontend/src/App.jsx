@@ -25,6 +25,8 @@ import TemplatesPage from "./pages/TemplatesPage";
 import ToolsIndexPage from "./pages/ToolsIndexPage";
 import InvoiceNumberGeneratorPage from "./pages/InvoiceNumberGeneratorPage";
 import InvoiceValidatorPage from "./pages/InvoiceValidatorPage";
+import GstRateFinderPage from "./pages/GstRateFinderPage";
+import RecurringInvoicesPage from "./pages/RecurringInvoicesPage";
 import UploadPage from "./pages/UploadPage";
 import AuthCallbackPage from "./pages/AuthCallbackPage";
 
@@ -83,6 +85,7 @@ export default function App() {
       <Route path="/tools/late-fee" element={<LateFeeCalculatorPage />} />
       <Route path="/tools/invoice-number-generator" element={<InvoiceNumberGeneratorPage />} />
       <Route path="/tools/invoice-validator" element={<InvoiceValidatorPage />} />
+      <Route path="/tools/gst-rate-finder" element={<GstRateFinderPage />} />
 
       {/* SEO & content pages */}
       <Route path="/blog" element={<BlogListPage />} />
@@ -95,6 +98,7 @@ export default function App() {
       <Route path="/invoices/:id" element={<Protected><InvoiceDetailPage /></Protected>} />
       <Route path="/upload" element={<Protected><UploadPage /></Protected>} />
       <Route path="/hsn" element={<Protected><HsnLookupPage /></Protected>} />
+      <Route path="/recurring" element={<Protected><RecurringInvoicesPage /></Protected>} />
       <Route path="/export" element={<Protected><ExportPage /></Protected>} />
       <Route path="/settings" element={<Protected><SettingsPage /></Protected>} />
       <Route path="/pricing" element={<PricingPage />} />

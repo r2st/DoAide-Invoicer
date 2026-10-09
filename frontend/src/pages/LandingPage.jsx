@@ -52,6 +52,7 @@ const TOOLS = [
   { icon: "🔢", title: "Number Generator", desc: "Sequential GST-compliant invoice numbers", to: "/tools/invoice-number-generator" },
   { icon: "✅", title: "Invoice Validator", desc: "Check GST compliance of any invoice", to: "/tools/invoice-validator" },
   { icon: "🎨", title: "Invoice Templates", desc: "6 free professional templates to choose from", to: "/templates" },
+  { icon: "🔍", title: "GST Rate Finder", desc: "Find GST rates & HSN/SAC codes instantly", to: "/tools/gst-rate-finder" },
 ];
 
 const FEATURES = [
@@ -202,12 +203,12 @@ export default function LandingPage() {
             DoAide <em className="text-brand">Invoicer</em>
           </span>
         </div>
-        <nav className="ml-auto flex items-center gap-4">
+        <nav className="ml-auto flex items-center gap-3 sm:gap-4">
           <Link to="/create" className="text-sm text-ink-soft hover:text-brand transition-colors hidden sm:inline">Create Invoice</Link>
           <Link to="/templates" className="text-sm text-ink-soft hover:text-brand transition-colors hidden sm:inline">Templates</Link>
-          <Link to="/calculator" className="text-sm text-ink-soft hover:text-brand transition-colors hidden sm:inline">Calculator</Link>
+          <Link to="/tools" className="text-sm text-ink-soft hover:text-brand transition-colors hidden md:inline">Tools</Link>
           <Link to="/blog" className="text-sm text-ink-soft hover:text-brand transition-colors hidden md:inline">Blog</Link>
-          <a href="#pricing" className="text-sm text-ink-soft hover:text-brand transition-colors">Pricing</a>
+          <a href="#pricing" className="text-sm text-ink-soft hover:text-brand transition-colors hidden sm:inline">Pricing</a>
           <ThemeToggle />
         </nav>
       </header>
@@ -339,6 +340,7 @@ export default function LandingPage() {
                 <Link to="/templates" className="text-xs text-ink-soft hover:text-brand transition-colors">Templates</Link>
                 <Link to="/tools/invoice-number-generator" className="text-xs text-ink-soft hover:text-brand transition-colors">Number Generator</Link>
                 <Link to="/tools/invoice-validator" className="text-xs text-ink-soft hover:text-brand transition-colors">Invoice Validator</Link>
+                <Link to="/tools/gst-rate-finder" className="text-xs text-ink-soft hover:text-brand transition-colors">GST Rate Finder</Link>
               </div>
             </div>
             <div>
@@ -350,6 +352,8 @@ export default function LandingPage() {
                 <Link to="/blog/gst-invoice-format-guide" className="text-xs text-ink-soft hover:text-brand transition-colors">GST Invoice Guide</Link>
                 <Link to="/blog/how-to-send-invoices-india" className="text-xs text-ink-soft hover:text-brand transition-colors">Sending Invoices Guide</Link>
                 <Link to="/blog/gst-invoice-vs-regular-invoice" className="text-xs text-ink-soft hover:text-brand transition-colors">GST vs Regular Invoice</Link>
+                <Link to="/blog/input-tax-credit-guide-india" className="text-xs text-ink-soft hover:text-brand transition-colors">ITC Guide</Link>
+                <Link to="/blog/invoice-payment-terms-best-practices" className="text-xs text-ink-soft hover:text-brand transition-colors">Payment Terms Guide</Link>
               </div>
             </div>
             <div>

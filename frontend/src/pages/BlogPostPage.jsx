@@ -242,6 +242,121 @@ const CONTENT = {
       },
     ],
   },
+  "input-tax-credit-guide-india": {
+    sections: [
+      {
+        heading: "What is Input Tax Credit (ITC)?",
+        body: "Input Tax Credit (ITC) is the mechanism that allows GST-registered businesses to reduce their tax liability by claiming credit for the GST they paid on purchases (inputs). If you buy raw materials, services, or capital goods for your business and pay GST on them, you can subtract that amount from the GST you collect on your sales. This prevents the cascading effect of tax-on-tax and is one of the fundamental benefits of the GST system.",
+      },
+      {
+        heading: "Who Can Claim ITC?",
+        body: "Not every business can claim ITC. You must meet these eligibility conditions:",
+        list: [
+          "You must be registered under GST — unregistered businesses cannot claim ITC",
+          "You must have a valid tax invoice or debit note from the supplier",
+          "You must have actually received the goods or services",
+          "The supplier must have filed their GST return and paid the tax to the government",
+          "You must file your GST returns on time — late filing can delay or forfeit ITC claims",
+          "The goods or services must be used for business purposes, not personal use",
+          "Businesses under the composition scheme cannot claim ITC",
+        ],
+      },
+      {
+        heading: "Documents Required for ITC Claims",
+        body: "The GST Act specifies which documents are valid for claiming ITC. Missing or incorrect documents are the most common reason for rejected claims:",
+        list: [
+          "Tax invoice issued by the supplier (must contain GSTIN, HSN/SAC, and tax amount)",
+          "Debit note issued by the supplier",
+          "Bill of entry for imported goods (customs duty)",
+          "ISD (Input Service Distributor) invoice for distributed credits",
+          "The invoice must match the details in GSTR-2B (auto-populated from supplier's GSTR-1)",
+        ],
+      },
+      {
+        heading: "Common Mistakes That Lead to ITC Rejection",
+        body: "Indian businesses lose crores in ITC claims every year due to avoidable errors. Watch out for these:",
+        list: [
+          "Claiming ITC on invoices from unregistered suppliers — only GST-registered suppliers generate valid tax invoices",
+          "GSTIN mismatch — the GSTIN on the invoice must exactly match your registration",
+          "Not verifying GSTR-2B reconciliation — if the supplier hasn't filed their return, the ITC won't appear in your 2B",
+          "Claiming ITC on blocked items — certain categories like food, club memberships, and personal vehicles are blocked from ITC",
+          "Missing the time limit — ITC must be claimed before the earlier of: filing the September return of the following year, or the annual return date",
+          "Duplicate claims — claiming the same invoice twice across different return periods",
+        ],
+      },
+      {
+        heading: "Items Where ITC Cannot Be Claimed (Blocked Credits)",
+        body: "Section 17(5) of the CGST Act lists items where ITC is specifically blocked, regardless of business use:",
+        list: [
+          "Motor vehicles and conveyances (except when used for specified purposes like transport, training, or resale)",
+          "Food and beverages, outdoor catering, beauty treatment, health services, cosmetic and plastic surgery",
+          "Membership of a club, health and fitness centre",
+          "Rent-a-cab, life insurance, health insurance (except when provided to employees under a statutory obligation)",
+          "Travel benefits extended to employees on vacation",
+          "Works contract services for construction of immovable property (except plant and machinery)",
+          "Goods or services used for personal consumption",
+          "Goods lost, stolen, destroyed, written off, or given as free samples",
+        ],
+      },
+      {
+        heading: "Maximize Your ITC with Proper Invoicing",
+        body: "The key to successful ITC claims starts with proper invoicing. Every invoice you receive — and every invoice you issue — must contain all mandatory GST fields. Use DoAide Invoicer's GST Compliant template to ensure your invoices include GSTIN, HSN/SAC codes, and proper tax breakdowns that support ITC claims for your clients.",
+        cta: { text: "Create GST-Compliant Invoice", to: "/create?template=gst-compliant" },
+      },
+    ],
+  },
+  "invoice-payment-terms-best-practices": {
+    sections: [
+      {
+        heading: "Why Payment Terms Matter",
+        body: "Payment terms are the conditions under which you expect to receive payment for goods or services. They're more than just a line on your invoice — they directly affect your cash flow, working capital, and business relationships. Indian SMEs report an average collection period of 45-90 days, but businesses that use clear, strategic payment terms consistently get paid 30-40% faster. The right payment terms balance your cash flow needs with your client's payment capabilities.",
+      },
+      {
+        heading: "Common Payment Terms Explained",
+        body: "Understanding standard payment terms helps you choose the right one for each client relationship:",
+        list: [
+          "Due on Receipt — payment expected immediately upon receiving the invoice. Best for small transactions and new clients.",
+          "Net 15 / Net 30 / Net 45 / Net 60 — payment due within 15, 30, 45, or 60 days of invoice date. Net 30 is the most common in India.",
+          "2/10 Net 30 — 2% discount if paid within 10 days, otherwise full amount due in 30 days. Motivates early payment.",
+          "50% Advance — half the payment upfront before starting work. Standard for projects, custom manufacturing, and high-value services.",
+          "Milestone-based — payments tied to project milestones (e.g., 30% on signing, 40% on delivery, 30% on acceptance). Common in IT and construction.",
+          "COD (Cash on Delivery) — payment collected at the time of delivery. Still prevalent in Indian B2C and small B2B transactions.",
+          "End of Month (EOM) — payment due at the end of the month in which the invoice was issued.",
+        ],
+      },
+      {
+        heading: "Choosing the Right Payment Terms",
+        body: "The ideal payment terms depend on several factors specific to your business and client:",
+        list: [
+          "New clients — start with shorter terms (Net 15 or 50% advance) until trust is established. You can extend terms as the relationship matures.",
+          "Large corporates — often insist on Net 60 or Net 90. Factor this into your pricing and negotiate for earlier payment discounts.",
+          "Freelancers and agencies — milestone-based or 50% advance protects against scope creep and non-payment.",
+          "Recurring services (retainers) — monthly advance payment is ideal. If not possible, Net 15 keeps cash flow healthy.",
+          "Product businesses — Due on Receipt or Net 15 for physical goods. Cash on Delivery for first-time buyers.",
+          "High-value contracts — always require a significant advance (30-50%) and structure remaining payments around deliverables.",
+        ],
+      },
+      {
+        heading: "Late Payment Strategies That Work in India",
+        body: "Despite clear terms, late payments are common in India. These strategies help without damaging relationships:",
+        list: [
+          "Send a reminder 3 days before the due date — a polite WhatsApp message works better than a formal email",
+          "Follow up on Day 1 after the due date — prompt follow-up signals that you track payments closely",
+          "Include a late fee clause in your terms — '1.5% per month on overdue amounts' is standard and legally enforceable",
+          "Offer UPI/bank transfer options — making it easy to pay reduces friction and excuses",
+          "Invoice immediately after delivery — don't wait until month-end; delayed invoicing leads to delayed payments",
+          "Build relationships with the accounts payable team — knowing the right contact speeds up processing",
+          "Use read receipts — knowing when your invoice was viewed helps time follow-ups effectively",
+          "Consider factoring for persistent late-payers — invoice factoring services in India can provide 80-90% of invoice value upfront",
+        ],
+      },
+      {
+        heading: "How to Add Payment Terms to Your Invoice",
+        body: "Clear payment terms on your invoice set expectations from the start. Your invoice should explicitly state: the due date (not just 'Net 30' — write the actual date), accepted payment methods with account details, late fee policy, and any early payment discount. DoAide Invoicer includes a dedicated payment terms section in every template, and our Payment Terms Calculator helps you compute due dates and discounts automatically.",
+        cta: { text: "Create Invoice with Payment Terms", to: "/create" },
+      },
+    ],
+  },
 };
 
 export default function BlogPostPage() {

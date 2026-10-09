@@ -20,6 +20,13 @@ const SITEMAP_ENTRIES = [
   { url: "/blog/how-to-create-professional-invoices", name: "How to Create Professional Invoices", priority: "0.6" },
   { url: "/tools/invoice-number-generator", name: "Invoice Number Generator", priority: "0.8" },
   { url: "/tools/invoice-validator", name: "GST Invoice Validator", priority: "0.8" },
+  { url: "/tools/gst-rate-finder", name: "GST Rate Finder", priority: "0.8" },
+  { url: "/tools/payment-terms", name: "Payment Terms Calculator", priority: "0.7" },
+  { url: "/tools/late-fee", name: "Late Fee Calculator", priority: "0.7" },
+  { url: "/blog/how-to-send-invoices-india", name: "How to Send Invoices in India", priority: "0.6" },
+  { url: "/blog/gst-invoice-vs-regular-invoice", name: "GST vs Regular Invoice", priority: "0.6" },
+  { url: "/blog/input-tax-credit-guide-india", name: "Input Tax Credit Guide", priority: "0.6" },
+  { url: "/blog/invoice-payment-terms-best-practices", name: "Payment Terms Best Practices", priority: "0.6" },
   { url: "/embed", name: "Embed Widget", priority: "0.5" },
 ];
 

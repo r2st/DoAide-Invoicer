@@ -6,6 +6,7 @@ const TOOLS = [
   { path: "/calculator", label: "Tax Calculator" },
   { path: "/tools/invoice-number-generator", label: "Number Generator" },
   { path: "/tools/invoice-validator", label: "Validator" },
+  { path: "/tools/gst-rate-finder", label: "GST Rates" },
   { path: "/templates", label: "Templates" },
 ];
 

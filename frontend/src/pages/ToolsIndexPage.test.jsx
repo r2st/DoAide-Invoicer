@@ -16,6 +16,7 @@ describe("ToolsIndexPage", () => {
     expect(screen.getByText("Payment Terms Calculator")).toBeInTheDocument();
     expect(screen.getByText("Late Fee Calculator")).toBeInTheDocument();
     expect(screen.getByText("Invoice Tax Calculator")).toBeInTheDocument();
+    expect(screen.getByText("GST Rate Finder")).toBeInTheDocument();
   });
 
   it("links to individual tool pages", () => {

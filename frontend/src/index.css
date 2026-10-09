@@ -130,6 +130,7 @@ body {
   .chip-warn { background: var(--warn-bg); color: var(--warn); }
   .chip-bad { background: var(--bad-bg); color: var(--bad); }
   .chip-neutral { background: var(--canvas); color: var(--ink-soft); }
+  .chip-brand { background: var(--glass-feature-bg); color: var(--brand); }
 
   .stat-card {
     background: var(--surface);
@@ -281,4 +282,19 @@ a:focus-visible {
 
 @media (pointer: coarse) {
   .btn { min-height: 44px; }
+  .input-field { min-height: 44px; }
+  select.input-field { min-height: 44px; }
+}
+
+@media (max-width: 640px) {
+  .table-base th,
+  .table-base td {
+    @apply px-2 py-2 text-xs;
+  }
+  .tools-nav { gap: 0.5rem; padding: 0.5rem 0.75rem; }
+  .tools-nav-links { gap: 0.25rem; }
+  .tools-nav-link { padding: 0.3rem 0.5rem; font-size: 0.75rem; }
+  .tools-nav-cta { padding: 0.3rem 0.75rem; font-size: 0.75rem; }
+  .tool-main { padding: 1.25rem 0.75rem; }
+  .tools-grid { grid-template-columns: 1fr; }
 }

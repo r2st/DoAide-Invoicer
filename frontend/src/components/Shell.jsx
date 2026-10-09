@@ -8,6 +8,7 @@ const LINKS = [
   { to: "/invoices", label: "Invoices" },
   { to: "/upload", label: "Upload" },
   { to: "/hsn", label: "HSN Lookup" },
+  { to: "/recurring", label: "Recurring" },
   { to: "/export", label: "Export" },
   { to: "/settings", label: "Settings" },
 ];

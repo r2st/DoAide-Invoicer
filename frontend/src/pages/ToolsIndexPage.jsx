@@ -9,6 +9,7 @@ const TOOLS = [
   { path: "/tools/invoice-validator", title: "GST Invoice Validator", description: "Validate invoices against GST rules — GSTIN, HSN, tax rates, and more.", icon: "✅" },
   { path: "/tools/payment-terms", title: "Payment Terms Calculator", description: "Calculate due dates and early payment discounts for any invoice.", icon: "📅" },
   { path: "/tools/late-fee", title: "Late Fee Calculator", description: "Calculate late payment penalties and interest charges.", icon: "⏰" },
+  { path: "/tools/gst-rate-finder", title: "GST Rate Finder", description: "Find GST rates and HSN/SAC codes for any product or service.", icon: "🔍" },
   { path: "/templates", title: "Invoice Templates", description: "Browse free invoice templates for different industries.", icon: "📁" },
 ];
 
