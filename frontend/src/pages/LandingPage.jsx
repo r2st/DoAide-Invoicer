@@ -49,6 +49,8 @@ function useTypewriter(lines, typingSpeed = 50, pauseMs = 2000) {
 const TOOLS = [
   { icon: "📄", title: "Invoice Generator", desc: "Create beautiful invoices instantly — no signup", to: "/create" },
   { icon: "🧮", title: "Tax Calculator", desc: "GST/CGST/SGST/IGST breakdown calculator", to: "/calculator" },
+  { icon: "🔢", title: "Number Generator", desc: "Sequential GST-compliant invoice numbers", to: "/tools/invoice-number-generator" },
+  { icon: "✅", title: "Invoice Validator", desc: "Check GST compliance of any invoice", to: "/tools/invoice-validator" },
   { icon: "🎨", title: "Invoice Templates", desc: "6 free professional templates to choose from", to: "/templates" },
 ];
 
@@ -335,6 +337,8 @@ export default function LandingPage() {
                 <Link to="/create" className="text-xs text-ink-soft hover:text-brand transition-colors">Invoice Generator</Link>
                 <Link to="/calculator" className="text-xs text-ink-soft hover:text-brand transition-colors">Tax Calculator</Link>
                 <Link to="/templates" className="text-xs text-ink-soft hover:text-brand transition-colors">Templates</Link>
+                <Link to="/tools/invoice-number-generator" className="text-xs text-ink-soft hover:text-brand transition-colors">Number Generator</Link>
+                <Link to="/tools/invoice-validator" className="text-xs text-ink-soft hover:text-brand transition-colors">Invoice Validator</Link>
               </div>
             </div>
             <div>

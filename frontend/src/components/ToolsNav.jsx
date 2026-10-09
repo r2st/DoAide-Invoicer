@@ -4,6 +4,8 @@ const TOOLS = [
   { path: "/tools", label: "All Tools" },
   { path: "/create", label: "Invoice Generator" },
   { path: "/calculator", label: "Tax Calculator" },
+  { path: "/tools/invoice-number-generator", label: "Number Generator" },
+  { path: "/tools/invoice-validator", label: "Validator" },
   { path: "/templates", label: "Templates" },
 ];
 

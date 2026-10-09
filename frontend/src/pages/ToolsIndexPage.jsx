@@ -5,6 +5,8 @@ import { usePageTitle } from "../hooks/usePageTitle";
 const TOOLS = [
   { path: "/create", title: "Invoice Generator", description: "Create a professional invoice and download it as PDF — no sign-up needed.", icon: "🧾" },
   { path: "/calculator", title: "Invoice Tax Calculator", description: "Calculate GST, CGST, SGST, and IGST for your invoices.", icon: "🧮" },
+  { path: "/tools/invoice-number-generator", title: "Invoice Number Generator", description: "Generate sequential, GST-compliant invoice numbers for your business.", icon: "🔢" },
+  { path: "/tools/invoice-validator", title: "GST Invoice Validator", description: "Validate invoices against GST rules — GSTIN, HSN, tax rates, and more.", icon: "✅" },
   { path: "/tools/payment-terms", title: "Payment Terms Calculator", description: "Calculate due dates and early payment discounts for any invoice.", icon: "📅" },
   { path: "/tools/late-fee", title: "Late Fee Calculator", description: "Calculate late payment penalties and interest charges.", icon: "⏰" },
   { path: "/templates", title: "Invoice Templates", description: "Browse free invoice templates for different industries.", icon: "📁" },

@@ -22,6 +22,8 @@ import SitemapPage from "./pages/SitemapPage";
 import TemplateDetailPage from "./pages/TemplateDetailPage";
 import TemplatesPage from "./pages/TemplatesPage";
 import ToolsIndexPage from "./pages/ToolsIndexPage";
+import InvoiceNumberGeneratorPage from "./pages/InvoiceNumberGeneratorPage";
+import InvoiceValidatorPage from "./pages/InvoiceValidatorPage";
 import UploadPage from "./pages/UploadPage";
 import AuthCallbackPage from "./pages/AuthCallbackPage";
 
@@ -76,6 +78,8 @@ export default function App() {
       <Route path="/tools" element={<ToolsIndexPage />} />
       <Route path="/tools/payment-terms" element={<PaymentTermsPage />} />
       <Route path="/tools/late-fee" element={<LateFeeCalculatorPage />} />
+      <Route path="/tools/invoice-number-generator" element={<InvoiceNumberGeneratorPage />} />
+      <Route path="/tools/invoice-validator" element={<InvoiceValidatorPage />} />
 
       {/* SEO & content pages */}
       <Route path="/blog" element={<BlogListPage />} />

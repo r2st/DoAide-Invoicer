@@ -18,6 +18,8 @@ const SITEMAP_ENTRIES = [
   { url: "/blog/free-invoice-generator-india-2026", name: "Free Invoice Generator India 2026", priority: "0.6" },
   { url: "/blog/gst-invoice-format-guide", name: "GST Invoice Format Guide", priority: "0.6" },
   { url: "/blog/how-to-create-professional-invoices", name: "How to Create Professional Invoices", priority: "0.6" },
+  { url: "/tools/invoice-number-generator", name: "Invoice Number Generator", priority: "0.8" },
+  { url: "/tools/invoice-validator", name: "GST Invoice Validator", priority: "0.8" },
   { url: "/embed", name: "Embed Widget", priority: "0.5" },
 ];
 
