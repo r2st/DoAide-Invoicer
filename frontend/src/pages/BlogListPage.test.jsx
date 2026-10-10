@@ -50,7 +50,7 @@ describe("BlogListPage", () => {
   });
 
   it("exports BLOG_POSTS array", () => {
-    expect(BLOG_POSTS).toHaveLength(7);
+    expect(BLOG_POSTS).toHaveLength(10);
     expect(BLOG_POSTS[0]).toHaveProperty("slug");
     expect(BLOG_POSTS[0]).toHaveProperty("title");
   });
@@ -59,5 +59,23 @@ describe("BlogListPage", () => {
     const gstPost = BLOG_POSTS.find((p) => p.slug === "gst-invoice-vs-regular-invoice");
     expect(gstPost).toBeTruthy();
     expect(gstPost.title).toContain("GST Invoice vs Regular Invoice");
+  });
+
+  it("includes GST Invoice Format 2026 post", () => {
+    const post = BLOG_POSTS.find((p) => p.slug === "gst-invoice-format-2026-complete-guide");
+    expect(post).toBeTruthy();
+    expect(post.title).toContain("GST Invoice Format 2026");
+  });
+
+  it("includes E-Invoicing Under GST post", () => {
+    const post = BLOG_POSTS.find((p) => p.slug === "e-invoicing-under-gst-requirements");
+    expect(post).toBeTruthy();
+    expect(post.title).toContain("E-Invoicing Under GST");
+  });
+
+  it("includes Proforma Invoice vs Tax Invoice post", () => {
+    const post = BLOG_POSTS.find((p) => p.slug === "proforma-invoice-vs-tax-invoice");
+    expect(post).toBeTruthy();
+    expect(post.title).toContain("Proforma Invoice vs Tax Invoice");
   });
 });

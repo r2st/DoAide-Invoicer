@@ -357,6 +357,225 @@ const CONTENT = {
       },
     ],
   },
+  "gst-invoice-format-2026-complete-guide": {
+    faqs: [
+      { q: "What is the correct GST invoice format in 2026?", a: "The correct GST invoice format in 2026 must include supplier and recipient GSTIN, a unique sequential invoice number (max 16 characters), date of issue, HSN/SAC codes, itemised tax breakdowns (CGST, SGST, or IGST), place of supply, total taxable value, and the supplier's signature. Businesses with turnover above ₹5 crore must also generate an e-invoice with IRN through the IRP portal." },
+      { q: "Is e-invoicing mandatory for all businesses in 2026?", a: "As of 2026, e-invoicing is mandatory for all GST-registered businesses with aggregate turnover exceeding ₹5 crore in any financial year from 2017-18 onwards. The government has progressively lowered the threshold and may reduce it further. Businesses below the threshold can still issue e-invoices voluntarily." },
+      { q: "What happens if my GST invoice is missing mandatory fields?", a: "An invoice missing mandatory fields may be treated as invalid under GST law. The buyer cannot claim Input Tax Credit (ITC) on such invoices, and the supplier may face penalties under Sections 122 and 125 of the CGST Act. Missing HSN codes or incorrect GSTIN can also trigger notices during GST audits." },
+      { q: "Can I use a free invoice generator for GST-compliant invoices?", a: "Yes. Free invoice generators like DoAide Invoicer include all mandatory GST fields — GSTIN, HSN/SAC codes, place of supply, and automatic CGST/SGST/IGST calculation. They produce legally valid invoices that comply with GST format requirements, though you still need to generate IRN separately through the IRP if e-invoicing applies to you." },
+      { q: "How many digits should the HSN code be on a GST invoice?", a: "The required HSN code length depends on your turnover. Businesses with turnover up to ₹5 crore must use 4-digit HSN codes, while businesses with turnover above ₹5 crore must use 6-digit HSN codes. For exports and imports, 8-digit HSN codes are mandatory." },
+    ],
+    sections: [
+      {
+        heading: "What Changed in the GST Invoice Format for 2026",
+        body: "The GST invoice format has undergone several updates since its introduction in 2017. In 2026, the most significant changes revolve around the expanded e-invoicing mandate, stricter HSN code requirements, and enhanced digital compliance measures. The Central Board of Indirect Taxes and Customs (CBIC) has progressively lowered the e-invoicing threshold from ₹500 crore in 2020 to ₹5 crore in 2023, and the 2026 rules continue to tighten enforcement. Businesses that previously relied on manual invoicing are now required to adopt structured digital formats. Understanding these changes is critical to avoid compliance penalties and ensure your clients can claim Input Tax Credit on your invoices.",
+      },
+      {
+        heading: "Mandatory Fields in a GST Invoice (2026 Rules)",
+        body: "Every GST tax invoice issued in 2026 must contain the following fields to be legally valid under the CGST Act. Missing any of these can lead to rejected ITC claims, penalty notices, or audit triggers:",
+        list: [
+          "Supplier's name, address, and GSTIN — your registered business identity",
+          "A unique, sequential invoice number — maximum 16 characters, no gaps allowed within a financial year",
+          "Date of issue — the date the invoice is generated, not the delivery date",
+          "Recipient's name, address, and GSTIN — mandatory for all B2B transactions; for B2C transactions above ₹50,000, recipient name and address are required",
+          "HSN code (for goods) or SAC code (for services) — 4-digit for turnover up to ₹5 crore, 6-digit for turnover above ₹5 crore",
+          "Description of goods or services — clear and specific, not generic terms like 'services rendered'",
+          "Quantity and unit of measurement — UQC (Unique Quantity Code) as per GST notification",
+          "Total value before tax — the base amount before any GST is applied",
+          "Taxable value after discounts — the amount on which GST is calculated",
+          "Tax rate and amount — separate line items for CGST and SGST (intra-state) or IGST (inter-state)",
+          "Place of supply — determines whether CGST+SGST or IGST applies; must include the state name and code",
+          "Reverse charge indication — if reverse charge mechanism (RCM) applies, it must be explicitly stated",
+          "Signature — digital or physical signature of the supplier or their authorised representative",
+        ],
+      },
+      {
+        heading: "E-Invoicing Requirements in 2026",
+        body: "E-invoicing through the Invoice Registration Portal (IRP) is now mandatory for businesses with aggregate turnover exceeding ₹5 crore. When you generate an e-invoice, the IRP validates your invoice data, assigns a unique Invoice Reference Number (IRN), digitally signs the invoice, and generates a QR code. The QR code contains key invoice details that can be scanned for instant verification. Your accounting or invoicing software must generate invoices in the prescribed JSON schema and communicate with the IRP via API. Non-compliance with e-invoicing results in the invoice being treated as invalid — the recipient cannot claim ITC, and you may face penalties up to ₹25,000 per invoice under Section 122 of the CGST Act.",
+        cta: { text: "Create GST-Compliant Invoice", to: "/create?template=gst-compliant" },
+      },
+      {
+        heading: "GST Invoice Format: Intra-State vs Inter-State",
+        body: "The place of supply determines which taxes appear on your invoice. Getting this wrong is one of the most common compliance mistakes, and it directly impacts your GST return filing:",
+        list: [
+          "Intra-state supply (supplier and recipient in the same state) — charge CGST + SGST at equal rates. For example, 18% GST = 9% CGST + 9% SGST",
+          "Inter-state supply (supplier and recipient in different states) — charge IGST at the full rate. For example, 18% GST = 18% IGST",
+          "Exports — treated as zero-rated inter-state supply. Issue invoice with IGST at 0% or under Letter of Undertaking (LUT)",
+          "Supply to SEZ — treated as inter-state supply, eligible for zero-rating with LUT or IGST refund",
+          "Place of supply for services follows specific rules under Sections 12 and 13 of the IGST Act — location of the recipient for most B2B services, location of the supplier for certain B2C services",
+        ],
+      },
+      {
+        heading: "Credit Notes and Debit Notes Under GST",
+        body: "When you need to adjust a previously issued invoice, GST law requires you to issue a credit note or debit note with specific details. A credit note reduces the tax liability — issue it when goods are returned, when you overcharged, or when a post-supply discount is given. A debit note increases the tax liability — issue it when the original invoice undercharged. Both must reference the original invoice number and date, include the reason for the adjustment, and be reported in your GSTR-1 for the relevant period. Credit notes for a financial year must be issued before 30th November of the following year or the date of filing the annual return, whichever is earlier.",
+      },
+      {
+        heading: "Common Format Mistakes That Trigger GST Notices",
+        body: "The GST department uses automated data matching to flag discrepancies. These common mistakes in invoice formatting are the top reasons businesses receive compliance notices:",
+        list: [
+          "GSTIN mismatch — the recipient's GSTIN on your invoice doesn't match their registration. Always verify on the GST portal before invoicing",
+          "Missing or incorrect HSN/SAC codes — using a generic 4-digit code when 6 digits are required, or mapping the wrong code to your product",
+          "Non-sequential invoice numbers — gaps in your invoice number series raise red flags during audits. Use a consistent numbering format",
+          "Wrong place of supply — billing address vs delivery address confusion leads to incorrect CGST/SGST vs IGST application",
+          "Missing reverse charge notation — forgetting to indicate RCM when it applies leads to incorrect tax treatment",
+          "Rounding errors — GST amounts must be rounded to the nearest rupee at the invoice level, not at the line-item level",
+          "Duplicate invoice numbers — two invoices with the same number in the same financial year is a compliance violation",
+        ],
+      },
+      {
+        heading: "Free GST Invoice Template for 2026",
+        body: "Creating a GST-compliant invoice from scratch every time is tedious and error-prone. DoAide Invoicer provides a free, ready-to-use GST invoice template that includes every mandatory field for 2026 — GSTIN validation, HSN/SAC codes, automatic CGST/SGST/IGST calculation based on place of supply, sequential invoice numbering, and instant PDF generation. No signup required. Choose the GST Compliant template, fill in your details, and download a legally valid invoice in 30 seconds. You can also use our Invoice Validator tool to check any existing invoice against the latest GST format requirements.",
+        cta: { text: "Download Free GST Invoice Template", to: "/create?template=gst-compliant" },
+      },
+    ],
+  },
+  "e-invoicing-under-gst-requirements": {
+    faqs: [
+      { q: "What is e-invoicing under GST?", a: "E-invoicing under GST is a system where B2B invoices are electronically authenticated by the Invoice Registration Portal (IRP). The portal assigns a unique Invoice Reference Number (IRN), digitally signs the invoice using the GST system's certificate, and generates a QR code. It does not mean generating invoices on a government portal — you create invoices in your own software, then report them to the IRP for validation." },
+      { q: "Who is required to generate e-invoices in 2026?", a: "As of 2026, all GST-registered businesses with aggregate turnover exceeding ₹5 crore in any financial year from 2017-18 onwards are required to generate e-invoices for all B2B supplies, exports, and supplies to SEZ. Certain categories like banking, insurance, and SEZ units are exempt." },
+      { q: "What is an IRN (Invoice Reference Number)?", a: "An IRN is a unique 64-character hash generated by the Invoice Registration Portal for each e-invoice. It is computed from the supplier's GSTIN, document type, document number, and financial year. The IRN serves as the unique identity of the invoice in the GST system and is used for de-duplication and verification." },
+      { q: "Can I cancel an e-invoice after generation?", a: "Yes, an e-invoice can be cancelled on the IRP within 24 hours of generation. After 24 hours, you cannot cancel the IRN on the portal — you must issue a credit note against the original invoice and report it in your GSTR-1. The cancellation reason must be recorded." },
+      { q: "What are the penalties for not generating e-invoices?", a: "Non-compliance with e-invoicing requirements results in the invoice being treated as if it was never issued. The recipient cannot claim ITC, and the supplier faces a penalty of up to ₹25,000 per invoice under Section 122 of the CGST Act. Additionally, non-compliant invoices will not be auto-populated in GSTR-1, requiring manual rectification." },
+    ],
+    sections: [
+      {
+        heading: "What is E-Invoicing Under GST?",
+        body: "E-invoicing, or electronic invoicing under India's Goods and Services Tax system, is a mechanism where business-to-business (B2B) invoices are electronically validated and authenticated by the government's Invoice Registration Portal (IRP). Contrary to a common misconception, e-invoicing does not mean creating invoices on a government website. Businesses continue to generate invoices using their own accounting software, ERP systems, or invoicing tools. The invoices are then reported to the IRP, which validates the data, assigns a unique Invoice Reference Number (IRN), digitally signs the document, and returns a QR code. This system was introduced to curb tax evasion, enable real-time tax reporting, automate return filing, and create an interoperable invoicing standard across India's diverse business ecosystem.",
+      },
+      {
+        heading: "Who Must Comply: E-Invoicing Turnover Thresholds",
+        body: "The government has progressively expanded the e-invoicing mandate since its launch in October 2020. The turnover thresholds have been reduced in phases to bring more businesses under the compliance net:",
+        list: [
+          "October 2020 — businesses with turnover above ₹500 crore",
+          "January 2021 — threshold lowered to ₹100 crore",
+          "April 2021 — threshold lowered to ₹50 crore",
+          "April 2022 — threshold lowered to ₹20 crore",
+          "October 2022 — threshold lowered to ₹10 crore",
+          "August 2023 — threshold lowered to ₹5 crore (current as of 2026)",
+          "The aggregate turnover is calculated across all GSTINs under a single PAN, and includes all financial years from 2017-18 onwards — once you cross the threshold in any year, e-invoicing is permanently mandatory",
+        ],
+      },
+      {
+        heading: "Exempt Categories: Who Doesn't Need E-Invoices",
+        body: "While the mandate is broad, certain categories of registered persons are exempt from e-invoicing requirements:",
+        list: [
+          "Banking companies, financial institutions, and NBFCs",
+          "Insurance companies and insurance intermediaries",
+          "Goods Transport Agencies (GTAs)",
+          "Registered persons supplying passenger transportation services",
+          "Suppliers of cinematograph films to multiplex screens",
+          "SEZ units (not SEZ developers — developers must comply)",
+          "Government departments and local authorities",
+          "Persons registered under Section 14 of the IGST Act (UN bodies and diplomatic missions)",
+        ],
+      },
+      {
+        heading: "The E-Invoice Generation Process: Step by Step",
+        body: "Understanding the technical flow of e-invoice generation helps you set up your systems correctly. The process involves your invoicing software, the IRP, and the GST portal:",
+        list: [
+          "Step 1 — Generate the invoice in your accounting/ERP/invoicing software with all mandatory GST fields (supplier GSTIN, recipient GSTIN, HSN/SAC codes, tax breakdowns, place of supply)",
+          "Step 2 — Your software converts the invoice into the prescribed JSON schema (version 1.1 as of 2026) and sends it to the IRP via API",
+          "Step 3 — The IRP validates the invoice data — checks for duplicate IRNs, validates GSTINs against the GST database, and verifies the JSON structure",
+          "Step 4 — If valid, the IRP generates a unique 64-character IRN (hash of GSTIN + invoice number + financial year + document type), digitally signs the invoice, and generates a QR code",
+          "Step 5 — The signed invoice with IRN and QR code is returned to your software and simultaneously forwarded to the GST portal for auto-population of GSTR-1",
+          "Step 6 — The recipient's GSTR-2B is also auto-populated, enabling seamless ITC matching",
+        ],
+      },
+      {
+        heading: "E-Invoice JSON Schema and Technical Requirements",
+        body: "The e-invoice JSON schema defines the exact structure your invoicing software must follow when reporting to the IRP. The schema includes mandatory and optional fields grouped into sections: transaction details, document period, supplier information, recipient information, item details, value details, and payment instructions. Your software must use the NIC (National Informatics Centre) API endpoints — the production URL is einvoice1.gst.gov.in. Authentication requires your GSTIN-linked credentials, and API calls use OAuth 2.0 tokens with a 1-hour expiry. Each API call can report one invoice at a time, though bulk generation is supported through batch endpoints. The IRP enforces a rate limit, so high-volume businesses should implement queuing in their integration. For businesses using simple invoicing tools like DoAide Invoicer, the generated PDF serves as your invoice record — you then report the data to the IRP through your GST software or an e-invoicing service.",
+      },
+      {
+        heading: "QR Code Requirements for E-Invoices",
+        body: "Every e-invoice generated through the IRP includes a QR code that contains essential invoice parameters for quick verification. The QR code encodes the supplier's GSTIN, recipient's GSTIN, invoice number, date of generation, invoice value, number of line items, HSN code of the main item, and a unique IRN hash. For B2C invoices by notified businesses (those required to issue dynamic QR codes), the QR code must additionally contain a UPI-compatible payment link. This allows customers to scan the QR code and make payment directly. The QR code must be printed on the physical invoice and included in the PDF version. Tax officers can scan the code using the GST Verify App to instantly validate the invoice against IRP records.",
+      },
+      {
+        heading: "Consequences of Non-Compliance",
+        body: "The penalties for failing to comply with e-invoicing requirements are substantial and affect both the supplier and the recipient:",
+        list: [
+          "Invalid invoice — an invoice without IRN is treated as if it was never issued. The supplier's GSTR-1 will not auto-populate, requiring manual entry and reconciliation",
+          "ITC denial for the recipient — buyers cannot claim Input Tax Credit on invoices that lack a valid IRN, increasing their effective cost",
+          "Penalty under Section 122 — suppliers face a penalty of up to ₹25,000 per invoice for issuing invoices that do not comply with e-invoicing requirements",
+          "Penalty under Section 125 — a general penalty of up to ₹25,000 for contravention of any GST provision, which can be applied in addition to Section 122 penalties",
+          "GSTR-1/GSTR-3B mismatch — non-e-invoiced transactions create discrepancies in return filing, which trigger automated notices from the GST portal",
+          "Audit red flags — systematic non-compliance with e-invoicing is a primary trigger for GST department audits and assessments",
+        ],
+      },
+      {
+        heading: "How to Get Started with E-Invoice Compliance",
+        body: "If your business has crossed the ₹5 crore turnover threshold, start by reviewing your current invoicing process. Ensure every invoice includes all mandatory GST fields — GSTIN, HSN/SAC codes, place of supply, and proper tax breakdowns. Use a GST-compliant invoicing tool to generate correctly formatted invoices, then integrate with an e-invoicing solution or your CA's software for IRP reporting. DoAide Invoicer's GST Compliant template ensures your invoice data has every field the IRP requires, making the e-invoice reporting step seamless. You can also use our Invoice Validator to check your existing invoices against the latest format requirements before reporting them.",
+        cta: { text: "Generate E-Invoice-Ready Invoice", to: "/create?template=gst-compliant" },
+      },
+    ],
+  },
+  "proforma-invoice-vs-tax-invoice": {
+    faqs: [
+      { q: "Is a proforma invoice legally binding in India?", a: "No, a proforma invoice is not legally binding. It is a preliminary document used as a quotation or estimate. It does not create a payment obligation, cannot be used for GST filing or ITC claims, and has no legal validity under the CGST Act. Only a tax invoice issued after the actual supply creates a legal obligation." },
+      { q: "Can I claim Input Tax Credit on a proforma invoice?", a: "No. Input Tax Credit (ITC) can only be claimed on a valid tax invoice or debit note issued by a GST-registered supplier. Proforma invoices are not recognised as valid documents for ITC claims under Section 16 of the CGST Act. You must obtain a proper tax invoice after the supply is completed." },
+      { q: "When should I use a proforma invoice instead of a tax invoice?", a: "Use a proforma invoice when you need to provide a price estimate, quotation, or preliminary cost breakdown before the actual supply. Common use cases include pre-sale quotations, customs declarations for imports, advance payment requests, and inter-company approvals. Issue the tax invoice only when the goods are delivered or services are completed." },
+      { q: "Does a proforma invoice need a GSTIN?", a: "A proforma invoice does not legally require a GSTIN since it is not a document recognised under GST law. However, including your GSTIN on a proforma invoice is considered good practice as it helps the recipient verify your registration status and prepares the groundwork for the final tax invoice." },
+      { q: "Can a proforma invoice be converted to a tax invoice?", a: "A proforma invoice itself cannot be 'converted' — it must be replaced by a new tax invoice that meets all GST requirements. The tax invoice should have its own unique sequential number and include all mandatory fields. It is common practice to reference the proforma invoice number on the tax invoice for the client's records." },
+    ],
+    sections: [
+      {
+        heading: "What is a Proforma Invoice?",
+        body: "A proforma invoice is a preliminary document sent by a seller to a buyer before the actual supply of goods or services takes place. The word 'proforma' comes from Latin, meaning 'for the sake of form' — and that accurately describes its purpose. It provides a detailed estimate of the transaction, including item descriptions, quantities, unit prices, expected taxes, and total cost. Think of it as a formal quotation dressed in invoice format. Indian businesses commonly use proforma invoices when responding to RFQs (Request for Quotation), negotiating with new clients, applying for import licences, requesting advance payments, or seeking internal procurement approvals. Unlike a tax invoice, a proforma invoice does not trigger a payment obligation, is not reported to the GST portal, and cannot be used for Input Tax Credit claims.",
+      },
+      {
+        heading: "What is a Tax Invoice Under GST?",
+        body: "A tax invoice is a legally mandated document issued by a GST-registered business when taxable goods are delivered or services are rendered. It is the most important document in the GST ecosystem because it serves as the basis for tax collection, ITC claims, return filing, and compliance verification. Under Section 31 of the CGST Act, a tax invoice must be issued at or before the time of supply. For goods, this means at or before the time of removal or delivery. For services, it must be issued within 30 days of the service being provided. A valid tax invoice contains all mandatory GST fields — supplier and recipient GSTIN, HSN/SAC codes, itemised tax breakdowns (CGST, SGST, or IGST), place of supply, and the supplier's signature. Without a valid tax invoice, the recipient cannot claim ITC, and the supplier's GSTR-1 filing will be incomplete.",
+      },
+      {
+        heading: "Key Differences: Proforma Invoice vs Tax Invoice",
+        body: "Understanding the fundamental differences between these two documents is essential for correct GST compliance and financial planning. Here is a comprehensive comparison:",
+        list: [
+          "Legal status — a tax invoice is a legally binding document required under the CGST Act; a proforma invoice has no legal validity under GST law and creates no payment obligation",
+          "When issued — a tax invoice is issued at or before the time of supply (delivery of goods or completion of services); a proforma invoice is issued before any supply takes place, during the negotiation or quotation stage",
+          "GST compliance — a tax invoice must include all mandatory GST fields (GSTIN, HSN/SAC, tax breakdowns, place of supply); a proforma invoice has no prescribed format under GST law",
+          "Input Tax Credit — only a tax invoice (or debit note) allows the buyer to claim ITC; a proforma invoice cannot be used for ITC claims under any circumstances",
+          "GST return filing — tax invoices are reported in GSTR-1 and auto-populated in the recipient's GSTR-2B; proforma invoices are not reported in any GST return",
+          "Invoice numbering — tax invoices must follow unique, sequential numbering within a financial year (max 16 characters); proforma invoices can use any numbering system",
+          "Payment obligation — a tax invoice creates a legal obligation for the buyer to pay the stated amount; a proforma invoice is merely an estimate and the final amount may change",
+          "E-invoicing — tax invoices must be reported to the IRP for businesses above the ₹5 crore threshold; proforma invoices are never reported to the IRP",
+          "Accounting treatment — tax invoices are recorded as revenue and accounts receivable; proforma invoices are not recorded as revenue until a tax invoice is issued",
+        ],
+      },
+      {
+        heading: "When Indian Businesses Should Use Each Document",
+        body: "Choosing the right document at the right stage of a transaction is critical for compliance and professionalism. Here are the most common scenarios:",
+        list: [
+          "Pre-sale quotation — use a proforma invoice when responding to a client's inquiry with a detailed price estimate, especially when the scope may change during negotiation",
+          "Import and export — a proforma invoice is required by customs authorities and banks for import licence applications, letter of credit (LC) opening, and foreign exchange approvals",
+          "Advance payment request — send a proforma invoice when requesting a deposit or advance before starting work. Issue the tax invoice when the full supply is completed",
+          "Internal approvals — large organisations require a proforma invoice for purchase order approval before vendors can issue the final tax invoice",
+          "Actual supply of goods — issue a tax invoice at or before the time of delivery. This is mandatory for every taxable supply",
+          "Service completion — issue a tax invoice within 30 days of completing the service. For continuous supply of services, issue invoices based on the payment schedule or due date, whichever is earlier",
+          "Recurring supplies — for ongoing contracts, issue a tax invoice for each supply or billing period. A proforma invoice at the start of the contract helps set expectations but does not replace periodic tax invoices",
+        ],
+      },
+      {
+        heading: "Common Mistakes Indian Businesses Make",
+        body: "Confusion between proforma and tax invoices leads to costly compliance errors. These are the most common mistakes and how to avoid them:",
+        list: [
+          "Using a proforma invoice as a tax invoice — some businesses send a proforma invoice and never follow up with a tax invoice, which means GST is not properly collected or reported",
+          "Claiming ITC on proforma invoices — buyers sometimes submit proforma invoices for ITC claims, which will be rejected and may trigger an audit",
+          "Labelling a tax invoice as 'proforma' — marking a valid tax invoice as proforma to delay GST reporting is a compliance violation",
+          "Not issuing a tax invoice after receiving advance payment — if you receive payment against a proforma invoice, you must issue a receipt voucher (and eventually a tax invoice) to comply with GST rules",
+          "Using the same number series for both — proforma and tax invoices should use distinct number series to avoid confusion in bookkeeping and GST filing",
+          "Sending proforma invoices to GST portal — proforma invoices should never be uploaded to GSTR-1 or reported to the IRP. Only tax invoices, credit notes, and debit notes are reported",
+        ],
+      },
+      {
+        heading: "How GST Applies to Proforma Invoices",
+        body: "Since a proforma invoice is not a recognised document under GST law, it has a unique relationship with the GST system. You can include estimated GST amounts on a proforma invoice for transparency — this helps the buyer understand the total expected cost — but this does not constitute actual tax collection. GST is only collected through a tax invoice. If a buyer makes an advance payment based on a proforma invoice, the supplier must issue a receipt voucher at the time of receiving the advance and account for GST on the advance amount. The tax invoice is then issued at the time of actual supply, and the advance is adjusted against it. For exports, a proforma invoice is used to obtain foreign exchange approvals from banks, but the actual export invoice (with IGST at 0% or under LUT) is the compliance document.",
+      },
+      {
+        heading: "Create Both Types of Invoices with DoAide Invoicer",
+        body: "Whether you need a proforma invoice for a quotation or a GST-compliant tax invoice for a completed supply, DoAide Invoicer has you covered. Use the Standard or Professional template for proforma invoices — simply label the document as 'Proforma Invoice' in the title field. For tax invoices, use the GST Compliant template with all mandatory fields pre-configured — GSTIN, HSN/SAC codes, place of supply, and automatic CGST/SGST/IGST calculation. Both are free, require no signup, and generate professional PDFs in 30 seconds. You can also use our Invoice Validator to verify that your tax invoices meet all GST format requirements before sending them.",
+        cta: { text: "Create Your Invoice Now", to: "/create" },
+      },
+    ],
+  },
 };
 
 export default function BlogPostPage() {
@@ -388,8 +607,43 @@ export default function BlogPostPage() {
     window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, "_blank", "noopener");
   };
 
+  const faqs = content.faqs || [];
+
   return (
     <div className="min-h-screen bg-canvas">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            headline: post.title,
+            description: post.excerpt,
+            datePublished: post.date,
+            dateModified: post.date,
+            url: pageUrl,
+            author: { "@type": "Organization", name: "Apprend Technologies", url: "https://doaide.com" },
+            publisher: { "@type": "Organization", name: "DoAide Invoicer", url: "https://invoicer.doaide.com", logo: { "@type": "ImageObject", url: "https://invoicer.doaide.com/logo.png" } },
+            mainEntityOfPage: { "@type": "WebPage", "@id": pageUrl },
+          }),
+        }}
+      />
+      {faqs.length > 0 && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              mainEntity: faqs.map((faq) => ({
+                "@type": "Question",
+                name: faq.q,
+                acceptedAnswer: { "@type": "Answer", text: faq.a },
+              })),
+            }),
+          }}
+        />
+      )}
       <header className="flex items-center max-w-3xl w-full mx-auto px-5 py-5">
         <Link to="/blog" className="flex items-center gap-2 text-sm text-ink-soft hover:text-brand transition-colors">
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
@@ -431,6 +685,23 @@ export default function BlogPostPage() {
             </section>
           ))}
         </div>
+
+        {faqs.length > 0 && (
+          <section className="mt-10">
+            <h2 className="font-display text-2xl text-ink-strong mb-5">Frequently Asked Questions</h2>
+            <div className="space-y-4">
+              {faqs.map((faq, i) => (
+                <details key={i} className="panel group">
+                  <summary className="cursor-pointer font-display text-lg text-ink-strong group-open:text-brand transition-colors list-none flex items-start gap-2">
+                    <span className="text-brand mt-0.5 flex-shrink-0 transition-transform group-open:rotate-90">&#9654;</span>
+                    <span>{faq.q}</span>
+                  </summary>
+                  <p className="text-sm text-ink-soft leading-relaxed mt-3 ml-6">{faq.a}</p>
+                </details>
+              ))}
+            </div>
+          </section>
+        )}
 
         <div className="border-t border-line mt-10 pt-6">
           <div className="flex flex-wrap gap-3">

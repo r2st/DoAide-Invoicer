@@ -52,6 +52,27 @@ export const BLOG_POSTS = [
     date: "2026-10-10",
     readTime: "6 min read",
   },
+  {
+    slug: "gst-invoice-format-2026-complete-guide",
+    title: "GST Invoice Format 2026: Complete Guide with Free Template",
+    excerpt: "Updated for 2026 — learn the latest GST invoice format rules, mandatory fields, e-invoicing thresholds, and download a free GST-compliant invoice template.",
+    date: "2026-10-10",
+    readTime: "9 min read",
+  },
+  {
+    slug: "e-invoicing-under-gst-requirements",
+    title: "E-Invoicing Under GST: Mandatory Requirements and How to Comply",
+    excerpt: "E-invoicing is now mandatory for businesses with turnover above ₹5 crore. Learn the complete process — IRN generation, QR codes, JSON schema, and step-by-step compliance guide.",
+    date: "2026-10-10",
+    readTime: "10 min read",
+  },
+  {
+    slug: "proforma-invoice-vs-tax-invoice",
+    title: "Proforma Invoice vs Tax Invoice: Key Differences for Indian Businesses",
+    excerpt: "Understand when to use a proforma invoice versus a tax invoice — legal validity, GST implications, ITC eligibility, and practical use cases for Indian businesses.",
+    date: "2026-10-10",
+    readTime: "8 min read",
+  },
 ];
 
 export default function BlogListPage() {
