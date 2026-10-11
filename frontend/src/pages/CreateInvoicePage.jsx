@@ -123,9 +123,9 @@ export default function CreateInvoicePage() {
         body { font-family: 'Segoe UI', system-ui, sans-serif; color: #1a1a1d; padding: 40px; max-width: 800px; margin: 0 auto; }
         h1 { font-size: 28px; margin-bottom: 4px; }
         h2 { font-size: 14px; text-transform: uppercase; letter-spacing: 2px; color: #666; margin-bottom: 12px; }
-        .header { display: flex; justify-content: space-between; margin-bottom: 32px; border-bottom: 3px solid #f0b429; padding-bottom: 20px; }
+        .header { display: flex; justify-content: space-between; margin-bottom: 32px; border-bottom: 3px solid #0D9488; padding-bottom: 20px; }
         .meta { text-align: right; }
-        .meta .inv-num { font-size: 24px; font-weight: bold; color: #f0b429; }
+        .meta .inv-num { font-size: 24px; font-weight: bold; color: #0D9488; }
         .parties { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 32px; }
         .party p { font-size: 14px; color: #444; line-height: 1.6; }
         .party .name { font-weight: 600; font-size: 16px; color: #1a1a1d; }
@@ -135,7 +135,7 @@ export default function CreateInvoicePage() {
         .amount { text-align: right; }
         .totals { width: 300px; margin-left: auto; }
         .totals tr td { padding: 6px 12px; }
-        .totals .grand { font-weight: bold; font-size: 18px; border-top: 2px solid #f0b429; }
+        .totals .grand { font-weight: bold; font-size: 18px; border-top: 2px solid #0D9488; }
         .notes { margin-top: 32px; padding: 16px; background: #fafafa; border-radius: 8px; font-size: 13px; color: #666; }
         .bank { margin-top: 16px; font-size: 13px; color: #666; }
         .footer { margin-top: 40px; text-align: center; font-size: 11px; color: #999; }
@@ -149,16 +149,11 @@ export default function CreateInvoicePage() {
   return (
     <div className="min-h-screen bg-canvas">
       <header className="flex items-center max-w-5xl w-full mx-auto px-5 py-5">
-        <Link to="/" className="flex items-center gap-2.5">
-          <svg viewBox="0 0 40 40" className="w-8 h-8" aria-hidden="true">
-            <rect x="4" y="6" width="32" height="28" rx="4" fill="var(--brand)" />
-            <rect x="8" y="12" width="18" height="2" rx="1" fill="var(--brand-text)" />
-            <rect x="8" y="17" width="24" height="2" rx="1" fill="var(--brand-text)" />
-            <rect x="8" y="22" width="14" height="2" rx="1" fill="var(--brand-text)" />
-            <rect x="8" y="27" width="20" height="2" rx="1" fill="var(--brand-text)" />
-          </svg>
-          <span className="font-display text-2xl tracking-tight text-ink-strong">
-            DoAide <em className="text-brand">Invoicer</em>
+        <Link to="/" className="flex items-center gap-2.5 no-underline">
+          <span className="text-2xl font-bold tracking-tight">
+            <span className="text-brand">DoAide</span>
+            <span className="text-ink-muted mx-1.5">|</span>
+            <span className="text-ink-strong">Invoicer</span>
           </span>
         </Link>
         <div className="ml-auto flex items-center gap-3">
@@ -363,7 +358,7 @@ export default function CreateInvoicePage() {
 
       <div ref={printRef} style={{ position: "absolute", left: "-9999px", top: 0 }}>
         <div style={{ maxWidth: 800, margin: "0 auto" }}>
-          <div className="header" style={{ display: "flex", justifyContent: "space-between", marginBottom: 32, borderBottom: "3px solid #f0b429", paddingBottom: 20 }}>
+          <div className="header" style={{ display: "flex", justifyContent: "space-between", marginBottom: 32, borderBottom: "3px solid #0D9488", paddingBottom: 20 }}>
             <div>
               <h1 style={{ fontSize: 28, fontWeight: "bold", color: "#1a1a1d", marginBottom: 4 }}>{from.name || "Your Business"}</h1>
               {from.email && <p style={{ fontSize: 13, color: "#666" }}>{from.email}</p>}
@@ -372,7 +367,7 @@ export default function CreateInvoicePage() {
               {from.gstin && <p style={{ fontSize: 13, color: "#666" }}>GSTIN: {from.gstin}</p>}
             </div>
             <div style={{ textAlign: "right" }}>
-              <div style={{ fontSize: 24, fontWeight: "bold", color: "#f0b429" }}>{invoiceNum}</div>
+              <div style={{ fontSize: 24, fontWeight: "bold", color: "#0D9488" }}>{invoiceNum}</div>
               <p style={{ fontSize: 13, color: "#666" }}>Date: {invoiceDate}</p>
               <p style={{ fontSize: 13, color: "#666" }}>Due: {dueDate}</p>
             </div>
@@ -424,7 +419,7 @@ export default function CreateInvoicePage() {
                   <tr key={rate}><td style={{ padding: "6px 12px", fontSize: 13, color: "#888" }}>CGST @ {rate / 2}% + SGST @ {rate / 2}%</td><td style={{ padding: "6px 12px", fontSize: 13, textAlign: "right" }}>{rupees(b.tax)}</td></tr>
                 ))
               ))}
-              <tr><td style={{ padding: "10px 12px", fontSize: 18, fontWeight: "bold", borderTop: "2px solid #f0b429" }}>Total</td><td style={{ padding: "10px 12px", fontSize: 18, fontWeight: "bold", textAlign: "right", borderTop: "2px solid #f0b429" }}>{rupees(grandTotal)}</td></tr>
+              <tr><td style={{ padding: "10px 12px", fontSize: 18, fontWeight: "bold", borderTop: "2px solid #0D9488" }}>Total</td><td style={{ padding: "10px 12px", fontSize: 18, fontWeight: "bold", textAlign: "right", borderTop: "2px solid #0D9488" }}>{rupees(grandTotal)}</td></tr>
             </tbody>
           </table>
 

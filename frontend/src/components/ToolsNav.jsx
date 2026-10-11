@@ -15,7 +15,9 @@ export default function ToolsNav() {
   return (
     <nav className="tools-nav">
       <Link to="/" className="tools-nav-brand">
-        DoAide <em>Invoicer</em>
+        <span style={{ color: "var(--brand)" }}>DoAide</span>
+        <span style={{ color: "var(--ink-muted)", margin: "0 4px" }}>|</span>
+        <span>Invoicer</span>
       </Link>
       <div className="tools-nav-links">
         {TOOLS.map((t) => (

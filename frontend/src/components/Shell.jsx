@@ -45,15 +45,10 @@ export default function Shell({ children }) {
 
       <header className="flex items-center gap-4 lg:gap-8 px-4 lg:px-6 py-3 bg-surface border-b border-line">
         <div className="flex items-center gap-2 font-bold">
-          <svg viewBox="0 0 40 40" className="w-7 h-7 flex-shrink-0" aria-hidden="true">
-            <rect x="4" y="6" width="32" height="28" rx="4" fill="var(--brand)" />
-            <rect x="8" y="12" width="18" height="2" rx="1" fill="var(--brand-text)" />
-            <rect x="8" y="17" width="24" height="2" rx="1" fill="var(--brand-text)" />
-            <rect x="8" y="22" width="14" height="2" rx="1" fill="var(--brand-text)" />
-            <rect x="8" y="27" width="20" height="2" rx="1" fill="var(--brand-text)" />
-          </svg>
-          <span className="font-display text-xl text-ink-strong">
-            DoAide <span className="italic text-brand">Invoicer</span>
+          <span className="text-xl text-ink-strong font-bold tracking-tight">
+            <span className="text-brand">DoAide</span>
+            <span className="text-ink-muted mx-1">|</span>
+            <span>Invoicer</span>
           </span>
         </div>
 
@@ -82,7 +77,7 @@ export default function Shell({ children }) {
               className={({ isActive }) =>
                 `px-3 py-2 rounded-[var(--radius)] text-sm transition-colors ${
                   isActive
-                    ? "bg-[rgba(240,180,41,0.12)] text-brand font-semibold"
+                    ? "bg-[rgba(13,148,136,0.12)] text-brand font-semibold"
                     : "text-ink-soft hover:text-ink"
                 }`
               }

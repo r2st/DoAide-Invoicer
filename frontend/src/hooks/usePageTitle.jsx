@@ -9,7 +9,7 @@ export function PageTitleProvider({ children }) {
 export function usePageTitle(title) {
   useEffect(() => {
     const prev = document.title;
-    document.title = title ? `${title} — DoAide Invoicer` : "DoAide Invoicer";
+    document.title = title ? `${title} — DoAide | Invoicer` : "DoAide | Invoicer";
     return () => { document.title = prev; };
   }, [title]);
 }

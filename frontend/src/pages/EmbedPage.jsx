@@ -5,21 +5,21 @@ import { usePageTitle } from "../hooks/usePageTitle";
 
 const STYLES = {
   primary: {
-    label: "Primary (Gold)",
+    label: "Primary (Teal)",
     base: "display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:8px;font-family:system-ui,sans-serif;font-weight:600;font-size:14px;text-decoration:none;cursor:pointer;border:none;",
-    normal: "background:#F0B429;color:#0A0A0B;",
-    hover: "background:#D4A017;",
+    normal: "background:#0D9488;color:#fff;",
+    hover: "background:#0F766E;",
   },
   outline: {
     label: "Outline",
     base: "display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:8px;font-family:system-ui,sans-serif;font-weight:600;font-size:14px;text-decoration:none;cursor:pointer;",
-    normal: "background:transparent;color:#F0B429;border:2px solid #F0B429;",
-    hover: "background:rgba(240,180,41,0.1);",
+    normal: "background:transparent;color:#0D9488;border:2px solid #0D9488;",
+    hover: "background:rgba(13,148,136,0.1);",
   },
   minimal: {
     label: "Minimal (Text Link)",
     base: "display:inline-flex;align-items:center;gap:6px;font-family:system-ui,sans-serif;font-weight:600;font-size:14px;text-decoration:none;cursor:pointer;border:none;background:transparent;padding:8px 0;",
-    normal: "color:#F0B429;",
+    normal: "color:#0D9488;",
     hover: "text-decoration:underline;",
   },
 };
@@ -39,7 +39,7 @@ export default function EmbedPage() {
   const [copied, setCopied] = useState("");
 
   const sizeOverrides = style === "minimal" ? "" : `padding:${SIZES[size].padding};font-size:${SIZES[size].fontSize};`;
-  const inlineStyle = STYLES[style].base + STYLES[style].normal + sizeOverrides + (dark ? "background:#1a1a1d;color:#F0B429;border-color:#F0B429;" : "");
+  const inlineStyle = STYLES[style].base + STYLES[style].normal + sizeOverrides + (dark ? "background:#1a1a1d;color:#0D9488;border-color:#0D9488;" : "");
 
   const embedCode = `<a href="https://invoicer.doaide.com/create" target="_blank" rel="noopener" style="${inlineStyle}">${buttonText}</a>`;
   const iframeCode = `<iframe src="https://invoicer.doaide.com/create?embed=1" width="100%" height="600" frameborder="0" style="border:1px solid #e5e5e5;border-radius:8px;"></iframe>`;
@@ -55,16 +55,11 @@ export default function EmbedPage() {
   return (
     <div className="min-h-screen bg-canvas">
       <header className="flex items-center max-w-5xl w-full mx-auto px-5 py-5">
-        <Link to="/" className="flex items-center gap-2.5">
-          <svg viewBox="0 0 40 40" className="w-8 h-8" aria-hidden="true">
-            <rect x="4" y="6" width="32" height="28" rx="4" fill="var(--brand)" />
-            <rect x="8" y="12" width="18" height="2" rx="1" fill="var(--brand-text)" />
-            <rect x="8" y="17" width="24" height="2" rx="1" fill="var(--brand-text)" />
-            <rect x="8" y="22" width="14" height="2" rx="1" fill="var(--brand-text)" />
-            <rect x="8" y="27" width="20" height="2" rx="1" fill="var(--brand-text)" />
-          </svg>
-          <span className="font-display text-2xl tracking-tight text-ink-strong">
-            DoAide <em className="text-brand">Invoicer</em>
+        <Link to="/" className="flex items-center gap-2.5 no-underline">
+          <span className="text-2xl font-bold tracking-tight">
+            <span className="text-brand">DoAide</span>
+            <span className="text-ink-muted mx-1.5">|</span>
+            <span className="text-ink-strong">Invoicer</span>
           </span>
         </Link>
         <div className="ml-auto"><ThemeToggle /></div>

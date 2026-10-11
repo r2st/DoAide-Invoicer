@@ -1,44 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Schibsted+Grotesk:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --ink: #E5E7EB;
-  --ink-soft: #9CA3AF;
-  --ink-strong: #fff;
-  --ink-muted: rgba(255, 255, 255, 0.45);
-  --ink-faint: rgba(255, 255, 255, 0.35);
-  --line: #2A2A2D;
-  --surface: #1A1A1D;
-  --surface-hover: #222225;
-  --canvas: #0A0A0B;
-  --brand: #F0B429;
-  --brand-dark: #D4A017;
-  --brand-text: #0A0A0B;
-  --brand-hover: #F7D070;
-  --good: #34D399;
-  --warn: #FBBF24;
-  --bad: #F87171;
-  --good-bg: rgba(52, 211, 153, 0.12);
-  --warn-bg: rgba(251, 191, 36, 0.12);
-  --bad-bg: rgba(248, 113, 113, 0.12);
-  --glass: rgba(16, 16, 18, 0.8);
-  --glass-border: rgba(255, 255, 255, 0.07);
-  --glass-inset: rgba(255, 255, 255, 0.04);
-  --glass-input: rgba(10, 10, 11, 0.6);
-  --glass-input-border: rgba(255, 255, 255, 0.12);
-  --glass-input-placeholder: rgba(255, 255, 255, 0.25);
-  --glass-tab-border: rgba(255, 255, 255, 0.08);
-  --glass-feature-border: rgba(240, 180, 41, 0.2);
-  --glass-feature-bg: rgba(240, 180, 41, 0.04);
-  --skeleton-mid: #2A2A2D;
-  --radius: 10px;
-  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-[data-theme="light"] {
+  --da-primary: #0D9488;
+  --da-bg: #FAFAFA;
+  --da-text: #1A1A1D;
+  --da-surface: #F4F4F5;
   --ink: #1A1A1D;
   --ink-soft: #52525B;
   --ink-strong: #0A0A0B;
@@ -48,8 +18,10 @@
   --surface: #F4F4F5;
   --surface-hover: #E4E4E7;
   --canvas: #FAFAFA;
+  --brand: #0D9488;
+  --brand-dark: #0F766E;
   --brand-text: #fff;
-  --brand-hover: #D4A017;
+  --brand-hover: #14B8A6;
   --good: #059669;
   --warn: #D97706;
   --bad: #DC2626;
@@ -63,10 +35,45 @@
   --glass-input-border: rgba(0, 0, 0, 0.15);
   --glass-input-placeholder: rgba(0, 0, 0, 0.35);
   --glass-tab-border: rgba(0, 0, 0, 0.1);
-  --glass-feature-border: rgba(180, 130, 10, 0.25);
-  --glass-feature-bg: rgba(240, 180, 41, 0.06);
+  --glass-feature-border: rgba(13, 148, 136, 0.25);
+  --glass-feature-bg: rgba(13, 148, 136, 0.06);
   --skeleton-mid: #E4E4E7;
+  --radius: 10px;
   --shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="dark"] {
+  --da-bg: #0A0A0B;
+  --da-text: #E5E7EB;
+  --da-surface: #1A1A1D;
+  --ink: #E5E7EB;
+  --ink-soft: #9CA3AF;
+  --ink-strong: #fff;
+  --ink-muted: rgba(255, 255, 255, 0.45);
+  --ink-faint: rgba(255, 255, 255, 0.35);
+  --line: #2A2A2D;
+  --surface: #1A1A1D;
+  --surface-hover: #222225;
+  --canvas: #0A0A0B;
+  --brand-text: #fff;
+  --brand-hover: #14B8A6;
+  --good: #34D399;
+  --warn: #FBBF24;
+  --bad: #F87171;
+  --good-bg: rgba(52, 211, 153, 0.12);
+  --warn-bg: rgba(251, 191, 36, 0.12);
+  --bad-bg: rgba(248, 113, 113, 0.12);
+  --glass: rgba(16, 16, 18, 0.8);
+  --glass-border: rgba(255, 255, 255, 0.07);
+  --glass-inset: rgba(255, 255, 255, 0.04);
+  --glass-input: rgba(10, 10, 11, 0.6);
+  --glass-input-border: rgba(255, 255, 255, 0.12);
+  --glass-input-placeholder: rgba(255, 255, 255, 0.25);
+  --glass-tab-border: rgba(255, 255, 255, 0.08);
+  --glass-feature-border: rgba(13, 148, 136, 0.2);
+  --glass-feature-bg: rgba(13, 148, 136, 0.08);
+  --skeleton-mid: #2A2A2D;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 * { box-sizing: border-box; }
@@ -75,7 +82,7 @@ body {
   margin: 0;
   background: var(--canvas);
   color: var(--ink);
-  font-family: 'Schibsted Grotesk', system-ui, -apple-system, sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   transition: background-color 200ms ease, color 200ms ease;
 }
@@ -192,7 +199,7 @@ body {
   }
   .dropzone.is-dragging {
     border-color: var(--brand);
-    background: rgba(240, 180, 41, 0.08);
+    background: rgba(13, 148, 136, 0.08);
   }
 }
 

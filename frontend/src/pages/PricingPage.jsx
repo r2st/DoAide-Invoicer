@@ -122,7 +122,7 @@ export default function PricingPage() {
               setError("Payment verification failed. Contact support if charged.");
             }
           },
-          theme: { color: "#f0b429" },
+          theme: { color: "#0D9488" },
         };
 
         const rzp = new window.Razorpay(options);
@@ -142,16 +142,11 @@ export default function PricingPage() {
   return (
     <div className="min-h-screen bg-canvas">
       <header className="flex items-center max-w-7xl w-full mx-auto px-5 py-5">
-        <Link to="/" className="flex items-center gap-2.5">
-          <svg viewBox="0 0 40 40" className="w-8 h-8" aria-hidden="true">
-            <rect x="4" y="6" width="32" height="28" rx="4" fill="var(--brand)" />
-            <rect x="8" y="12" width="18" height="2" rx="1" fill="var(--brand-text)" />
-            <rect x="8" y="17" width="24" height="2" rx="1" fill="var(--brand-text)" />
-            <rect x="8" y="22" width="14" height="2" rx="1" fill="var(--brand-text)" />
-            <rect x="8" y="27" width="20" height="2" rx="1" fill="var(--brand-text)" />
-          </svg>
-          <span className="font-display text-2xl tracking-tight text-ink-strong">
-            DoAide <em className="text-brand">Invoicer</em>
+        <Link to="/" className="flex items-center gap-2.5 no-underline">
+          <span className="text-2xl font-bold tracking-tight">
+            <span className="text-brand">DoAide</span>
+            <span className="text-ink-muted mx-1.5">|</span>
+            <span className="text-ink-strong">Invoicer</span>
           </span>
         </Link>
         <div className="ml-auto"><ThemeToggle /></div>

@@ -94,7 +94,7 @@ export default function ExportPage() {
               <label
                 key={f.value}
                 className={`flex items-start gap-3 p-3 rounded-[var(--radius)] border cursor-pointer transition-colors ${
-                  format === f.value ? "border-brand bg-[rgba(240,180,41,0.08)]" : "border-line hover:border-ink-soft"
+                  format === f.value ? "border-brand bg-[rgba(13,148,136,0.08)]" : "border-line hover:border-ink-soft"
                 }`}
               >
                 <input

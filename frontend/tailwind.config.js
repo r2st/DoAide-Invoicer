@@ -27,8 +27,8 @@ export default {
         "whatsapp-dark": "#128C7E",
       },
       fontFamily: {
-        sans: ["Schibsted Grotesk", "system-ui", "-apple-system", "sans-serif"],
-        display: ["Instrument Serif", "Georgia", "serif"],
+        sans: ["Inter", "system-ui", "-apple-system", "sans-serif"],
+        display: ["Inter", "system-ui", "-apple-system", "sans-serif"],
         mono: ["IBM Plex Mono", "ui-monospace", "SFMono-Regular", "monospace"],
       },
       borderRadius: {

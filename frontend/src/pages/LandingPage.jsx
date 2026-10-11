@@ -192,15 +192,10 @@ export default function LandingPage() {
     <div className="min-h-screen flex flex-col bg-canvas text-ink overflow-x-hidden">
       <header className="flex items-center max-w-7xl w-full mx-auto px-5 py-5">
         <div className="flex items-center gap-2.5">
-          <svg viewBox="0 0 40 40" className="w-8 h-8" aria-hidden="true">
-            <rect x="4" y="6" width="32" height="28" rx="4" fill="var(--brand)" />
-            <rect x="8" y="12" width="18" height="2" rx="1" fill="var(--brand-text)" />
-            <rect x="8" y="17" width="24" height="2" rx="1" fill="var(--brand-text)" />
-            <rect x="8" y="22" width="14" height="2" rx="1" fill="var(--brand-text)" />
-            <rect x="8" y="27" width="20" height="2" rx="1" fill="var(--brand-text)" />
-          </svg>
-          <span className="font-display text-2xl tracking-tight">
-            DoAide <em className="text-brand">Invoicer</em>
+          <span className="text-2xl font-bold tracking-tight">
+            <span className="text-brand">DoAide</span>
+            <span className="text-ink-muted mx-1.5">|</span>
+            <span className="text-ink-strong">Invoicer</span>
           </span>
         </div>
         <nav className="ml-auto flex items-center gap-3 sm:gap-4">
@@ -351,9 +346,7 @@ export default function LandingPage() {
                 <Link to="/embed" className="text-xs text-ink-soft hover:text-brand transition-colors">Embed Widget</Link>
                 <Link to="/blog/gst-invoice-format-guide" className="text-xs text-ink-soft hover:text-brand transition-colors">GST Invoice Guide</Link>
                 <Link to="/blog/how-to-send-invoices-india" className="text-xs text-ink-soft hover:text-brand transition-colors">Sending Invoices Guide</Link>
-                <Link to="/blog/gst-invoice-vs-regular-invoice" className="text-xs text-ink-soft hover:text-brand transition-colors">GST vs Regular Invoice</Link>
-                <Link to="/blog/input-tax-credit-guide-india" className="text-xs text-ink-soft hover:text-brand transition-colors">ITC Guide</Link>
-                <Link to="/blog/invoice-payment-terms-best-practices" className="text-xs text-ink-soft hover:text-brand transition-colors">Payment Terms Guide</Link>
+                <Link to="/sitemap" className="text-xs text-ink-soft hover:text-brand transition-colors">Sitemap</Link>
               </div>
             </div>
             <div>
@@ -365,15 +358,20 @@ export default function LandingPage() {
               </div>
             </div>
             <div>
-              <h4 className="text-sm font-semibold text-ink-strong mb-2">DoAide</h4>
+              <h4 className="text-sm font-semibold text-ink-strong mb-2">DoAide Products</h4>
               <div className="flex flex-col gap-1">
-                <a href="https://doaide.com" className="text-xs text-ink-soft hover:text-brand transition-colors">DoAide Home</a>
                 <a href="https://gst.doaide.com" className="text-xs text-ink-soft hover:text-brand transition-colors">DoAide GST</a>
-                <Link to="/sitemap" className="text-xs text-ink-soft hover:text-brand transition-colors">Sitemap</Link>
+                <a href="https://409.doaide.com" className="text-xs text-ink-soft hover:text-brand transition-colors">DoAide 409</a>
+                <a href="https://pulse.doaide.com" className="text-xs text-ink-soft hover:text-brand transition-colors">DoAide Pulse</a>
+                <a href="https://med.doaide.com" className="text-xs text-ink-soft hover:text-brand transition-colors">DoAide Med</a>
+                <a href="https://job.doaide.com" className="text-xs text-ink-soft hover:text-brand transition-colors">DoAide Job</a>
+                <a href="https://desk.doaide.com" className="text-xs text-ink-soft hover:text-brand transition-colors">DoAide Desk</a>
+                <a href="https://realty.doaide.com" className="text-xs text-ink-soft hover:text-brand transition-colors">DoAide Realty</a>
               </div>
             </div>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-ink-muted pt-4 border-t border-line">
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-[var(--glass-feature-border)] bg-[var(--glass-feature-bg)] text-brand font-medium">A DoAide Product</span>
             <span>&copy; {new Date().getFullYear()} DoAide. All rights reserved.</span>
           </div>
         </div>

@@ -17,7 +17,7 @@ function resolved(pref) {
   return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
 
-const ThemeCtx = createContext({ theme: "system", resolved: "dark", setTheme: () => {} });
+const ThemeCtx = createContext({ theme: "system", resolved: "light", setTheme: () => {} });
 
 export function ThemeProvider({ children }) {
   const [theme, setThemeRaw] = useState(stored);
