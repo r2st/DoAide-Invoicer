@@ -155,7 +155,7 @@ export default function EmbedPage() {
                 {[
                   { title: "Free for your visitors", desc: "No signup needed. Anyone can create a professional invoice instantly." },
                   { title: "Professional invoices", desc: "GST-compliant templates with automatic tax calculation and PDF download." },
-                  { title: "Powered by DoAide", desc: "Trusted invoicing platform used by thousands of Indian businesses." },
+                  { title: "Works on phones", desc: "Visitors can share the finished invoice straight to WhatsApp." },
                 ].map((b) => (
                   <div key={b.title} className="flex items-start gap-3">
                     <span className="text-brand text-lg mt-0.5">✓</span>

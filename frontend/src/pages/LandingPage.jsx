@@ -62,8 +62,6 @@ const FEATURES = [
   { icon: "🆓", title: "Free Forever", desc: "No signup needed for basic invoicing" },
 ];
 
-const COUNTER_TARGET = 12500;
-
 const FAQ_ITEMS = [
   { q: "Is DoAide Invoicer free to use?", a: "Yes. Creating invoices, downloading PDFs, and sharing via WhatsApp is completely free with no signup required. Pro plans add features like recurring invoices and custom branding." },
   { q: "Are the invoices GST-compliant?", a: "Yes. All invoice templates include mandatory GST fields including GSTIN, HSN/SAC codes, and automatic CGST/SGST/IGST calculation based on place of supply." },
@@ -71,50 +69,6 @@ const FAQ_ITEMS = [
   { q: "What's the difference between GST invoice and regular invoice?", a: "A GST invoice includes mandatory fields like GSTIN, HSN/SAC codes, and tax breakdowns required under GST law. Regular invoices lack these fields. Without a GST invoice, the buyer cannot claim Input Tax Credit." },
   { q: "How many invoice templates are available?", a: "6 free templates: Standard, Professional, Minimal, Creative, GST Compliant, and International. Each template includes all mandatory fields for Indian businesses." },
 ];
-
-function AnimatedCounter({ target, suffix = "+" }) {
-  const [count, setCount] = useState(0);
-  const [started, setStarted] = useState(false);
-  const [done, setDone] = useState(false);
-  const ref = useRef(null);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setStarted(true); observer.disconnect(); } },
-      { threshold: 0.3 },
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (!started) return;
-    const duration = 1500;
-    const steps = 40;
-    const increment = target / steps;
-    let current = 0;
-    const interval = setInterval(() => {
-      current += increment;
-      if (current >= target) {
-        setCount(target);
-        setDone(true);
-        clearInterval(interval);
-      } else {
-        setCount(Math.floor(current));
-      }
-    }, duration / steps);
-    return () => clearInterval(interval);
-  }, [started, target]);
-
-  const formatted = count.toLocaleString("en-IN");
-  return (
-    <span ref={ref} className={`font-mono font-bold ${done ? "animate-pulse" : ""}`} style={{ animationIterationCount: done ? 2 : 0 }}>
-      {formatted}{suffix}
-    </span>
-  );
-}
 
 function FaqSection() {
   const [openIndex, setOpenIndex] = useState(null);
@@ -215,8 +169,8 @@ export default function LandingPage() {
       >
         <div className="flex-1 min-w-0">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--glass-feature-bg)] border border-[var(--glass-feature-border)] text-sm text-brand mb-4">
-            <AnimatedCounter target={COUNTER_TARGET} />
-            <span className="text-ink-muted">invoices generated</span>
+            <span>Free</span>
+            <span className="text-ink-muted">· No sign-up · GST-ready</span>
           </div>
 
           <h1 className="font-display text-4xl lg:text-6xl font-normal leading-tight text-ink-strong mb-4">

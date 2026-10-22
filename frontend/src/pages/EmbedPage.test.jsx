@@ -31,7 +31,7 @@ describe("EmbedPage", () => {
 
   it("renders style options", () => {
     renderEmbed();
-    expect(screen.getByText("Primary (Gold)")).toBeInTheDocument();
+    expect(screen.getByText("Primary (Teal)")).toBeInTheDocument();
     expect(screen.getByText("Outline")).toBeInTheDocument();
     expect(screen.getByText("Minimal (Text Link)")).toBeInTheDocument();
   });
@@ -64,7 +64,7 @@ describe("EmbedPage", () => {
     renderEmbed();
     expect(screen.getByText("Free for your visitors")).toBeInTheDocument();
     expect(screen.getByText("Professional invoices")).toBeInTheDocument();
-    expect(screen.getByText("Powered by DoAide")).toBeInTheDocument();
+    expect(screen.getByText("Works on phones")).toBeInTheDocument();
   });
 
   it("updates button text when changed", async () => {

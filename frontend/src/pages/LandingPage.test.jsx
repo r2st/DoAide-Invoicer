@@ -56,9 +56,10 @@ describe("LandingPage", () => {
     expect(screen.getByText("Fill in details")).toBeInTheDocument();
   });
 
-  it("renders invoices generated counter", () => {
+  it("does not show an unverifiable usage counter", () => {
     renderLanding();
-    expect(screen.getByText("invoices generated")).toBeInTheDocument();
+    expect(screen.queryByText("invoices generated")).not.toBeInTheDocument();
+    expect(screen.getByText("· No sign-up · GST-ready")).toBeInTheDocument();
   });
 
   it("renders footer with navigation links", () => {
