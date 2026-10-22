@@ -74,6 +74,20 @@ describe("CreateInvoicePage", () => {
     window.localStorage.clear();
   });
 
+  it("sends the invoice summary with the GST split on WhatsApp", async () => {
+    const user = userEvent.setup();
+    const open = vi.spyOn(window, "open").mockImplementation(() => null);
+    renderCreate();
+    await user.type(screen.getByLabelText("Client Name"), "Mehta Stores");
+    await user.click(screen.getByText("Send via WhatsApp"));
+    const url = open.mock.calls[0][0];
+    const text = decodeURIComponent(url.split("text=")[1]);
+    expect(url.startsWith("https://wa.me/?text=")).toBe(true);
+    expect(text).toContain("To: Mehta Stores");
+    expect(text).toContain("Total payable");
+    open.mockRestore();
+  });
+
   it("adds a new line item when clicking add", async () => {
     const user = userEvent.setup();
     renderCreate();

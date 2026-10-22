@@ -4,6 +4,7 @@ import ThemeToggle from "../components/ThemeToggle";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { rupees } from "../lib/format";
 import { clearSavedBusiness, loadSavedBusiness, saveBusiness } from "../lib/invoiceDraft";
+import { canShareFile, invoiceTotals, invoiceWhatsappText, invoiceWhatsappUrl, shareInvoiceFile } from "../lib/invoiceShare";
 
 function nextInvoiceNumber() {
   let seq = 1;
@@ -28,6 +29,31 @@ const PAYMENT_TERMS = [
 ];
 
 const TAX_RATES = [0, 5, 12, 18, 28];
+
+const PRINT_CSS = `
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; color: #1a1a1d; padding: 40px; max-width: 800px; margin: 0 auto; }
+  h1 { font-size: 28px; margin-bottom: 4px; }
+  h2 { font-size: 14px; text-transform: uppercase; letter-spacing: 2px; color: #666; margin-bottom: 12px; }
+  .header { display: flex; justify-content: space-between; margin-bottom: 32px; border-bottom: 3px solid #0D9488; padding-bottom: 20px; }
+  .meta { text-align: right; }
+  .meta .inv-num { font-size: 24px; font-weight: bold; color: #0D9488; }
+  .parties { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 32px; }
+  .party p { font-size: 14px; color: #444; line-height: 1.6; }
+  .party .name { font-weight: 600; font-size: 16px; color: #1a1a1d; }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 24px; }
+  th { background: #f5f5f5; text-align: left; padding: 10px 12px; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #666; border-bottom: 2px solid #ddd; }
+  td { padding: 10px 12px; font-size: 14px; border-bottom: 1px solid #eee; }
+  .amount { text-align: right; }
+  .totals { width: 300px; margin-left: auto; }
+  .totals tr td { padding: 6px 12px; }
+  .totals .grand { font-weight: bold; font-size: 18px; border-top: 2px solid #0D9488; }
+  .notes { margin-top: 32px; padding: 16px; background: #fafafa; border-radius: 8px; font-size: 13px; color: #666; }
+  .bank { margin-top: 16px; font-size: 13px; color: #666; }
+  .footer { margin-top: 40px; text-align: center; font-size: 11px; color: #999; }
+  @media print { body { padding: 20px; } .footer { display: none; } }
+  @media (max-width: 600px) { body { padding: 16px; } th, td { padding: 6px; font-size: 12px; } }
+`;
 
 const EMPTY_ITEM = { description: "", hsn: "", qty: 1, rate: 0, tax: 18 };
 
@@ -92,33 +118,24 @@ export default function CreateInvoicePage() {
   const addItem = () => setItems((prev) => [...prev, { ...EMPTY_ITEM }]);
   const removeItem = (i) => setItems((prev) => prev.length > 1 ? prev.filter((_, idx) => idx !== i) : prev);
 
-  const subtotal = items.reduce((s, it) => s + it.qty * it.rate, 0);
-  const taxBreakdown = {};
-  items.forEach((it) => {
-    const taxable = it.qty * it.rate;
-    const rate = it.tax;
-    if (!taxBreakdown[rate]) taxBreakdown[rate] = { taxable: 0, tax: 0 };
-    taxBreakdown[rate].taxable += taxable;
-    taxBreakdown[rate].tax += taxable * (rate / 100);
-  });
-  const totalTax = Object.values(taxBreakdown).reduce((s, b) => s + b.tax, 0);
-  const grandTotal = subtotal + totalTax;
+  const { subtotal, taxBreakdown, totalTax, grandTotal } = invoiceTotals(items);
 
-  const buildTextSummary = useCallback(() => {
-    let text = `Invoice ${invoiceNum}\n`;
-    text += `From: ${from.name}\nTo: ${to.name}\n`;
-    text += `Date: ${invoiceDate} | Due: ${dueDate}\n\n`;
-    items.forEach((it, i) => {
-      text += `${i + 1}. ${it.description || "Item"} — Qty: ${it.qty} × ${rupees(it.rate)} = ${rupees(it.qty * it.rate)}\n`;
-    });
-    text += `\nSubtotal: ${rupees(subtotal)}\nTax: ${rupees(totalTax)}\nTotal: ${rupees(grandTotal)}`;
-    text += `\n\nCreated with DoAide Invoicer — https://invoicer.doaide.com/create`;
-    return text;
-  }, [invoiceNum, from.name, to.name, invoiceDate, dueDate, items, subtotal, totalTax, grandTotal]);
+  const invoiceData = useCallback(
+    () => ({ invoiceNum, from, to, invoiceDate, dueDate, items, interState, notes, bank }),
+    [invoiceNum, from, to, invoiceDate, dueDate, items, interState, notes, bank],
+  );
 
-  const shareWhatsApp = () => {
-    const text = buildTextSummary();
-    window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, "_blank", "noopener");
+  const invoiceDocument = () => `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${invoiceNum}</title><style>${PRINT_CSS}</style></head><body>${printRef.current?.innerHTML || ""}<div class="footer">Generated with DoAide Invoicer — invoicer.doaide.com</div></body></html>`;
+
+  // Phones get the invoice itself as a file; elsewhere the wa.me text has the full summary.
+  const shareWhatsApp = async () => {
+    const data = invoiceData();
+    if (!canShareFile()) {
+      window.open(invoiceWhatsappUrl(data), "_blank", "noopener");
+      return;
+    }
+    const result = await shareInvoiceFile({ invoiceNum, html: invoiceDocument(), text: invoiceWhatsappText(data) });
+    if (result === "unsupported") window.open(invoiceWhatsappUrl(data), "_blank", "noopener");
   };
 
   const shareTwitter = () => {
@@ -129,33 +146,10 @@ export default function CreateInvoicePage() {
   const handlePrint = () => {
     setShowPreview(true);
     setTimeout(() => {
-      const content = printRef.current;
-      if (!content) return;
+      if (!printRef.current) return;
       const win = window.open("", "_blank");
       if (!win) return;
-      win.document.write(`<!DOCTYPE html><html><head><title>${invoiceNum}</title><style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Segoe UI', system-ui, sans-serif; color: #1a1a1d; padding: 40px; max-width: 800px; margin: 0 auto; }
-        h1 { font-size: 28px; margin-bottom: 4px; }
-        h2 { font-size: 14px; text-transform: uppercase; letter-spacing: 2px; color: #666; margin-bottom: 12px; }
-        .header { display: flex; justify-content: space-between; margin-bottom: 32px; border-bottom: 3px solid #0D9488; padding-bottom: 20px; }
-        .meta { text-align: right; }
-        .meta .inv-num { font-size: 24px; font-weight: bold; color: #0D9488; }
-        .parties { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 32px; }
-        .party p { font-size: 14px; color: #444; line-height: 1.6; }
-        .party .name { font-weight: 600; font-size: 16px; color: #1a1a1d; }
-        table { width: 100%; border-collapse: collapse; margin-bottom: 24px; }
-        th { background: #f5f5f5; text-align: left; padding: 10px 12px; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #666; border-bottom: 2px solid #ddd; }
-        td { padding: 10px 12px; font-size: 14px; border-bottom: 1px solid #eee; }
-        .amount { text-align: right; }
-        .totals { width: 300px; margin-left: auto; }
-        .totals tr td { padding: 6px 12px; }
-        .totals .grand { font-weight: bold; font-size: 18px; border-top: 2px solid #0D9488; }
-        .notes { margin-top: 32px; padding: 16px; background: #fafafa; border-radius: 8px; font-size: 13px; color: #666; }
-        .bank { margin-top: 16px; font-size: 13px; color: #666; }
-        .footer { margin-top: 40px; text-align: center; font-size: 11px; color: #999; }
-        @media print { body { padding: 20px; } .footer { display: none; } }
-      </style></head><body>${content.innerHTML}<div class="footer">Generated with DoAide Invoicer — invoicer.doaide.com</div></body></html>`);
+      win.document.write(invoiceDocument());
       win.document.close();
       setTimeout(() => win.print(), 300);
     }, 100);
