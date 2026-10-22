@@ -18,7 +18,8 @@ const DESCRIPTION_TAGS = [
 export function usePageTitle(title, description) {
   useEffect(() => {
     const prev = document.title;
-    document.title = title ? `${title} — DoAide | Invoicer` : "DoAide | Invoicer";
+    // No title (the landing page) keeps index.html's own, which is the one to rank.
+    if (title) document.title = `${title} — DoAide | Invoicer`;
     const restore = [];
     if (description) {
       for (const [attr, key] of DESCRIPTION_TAGS) {
