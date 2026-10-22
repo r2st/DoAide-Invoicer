@@ -311,6 +311,7 @@ a:focus-visible {
   .btn, .input-field, select.input-field, .tools-nav-link, .tools-nav-cta, .theme-toggle { min-height: 48px; }
   .tools-nav-link, .tools-nav-cta { display: inline-flex; align-items: center; }
   .input-field { font-size: 16px; }
+  .onboarding-close, .onboarding-reopen { min-width: 48px; min-height: 48px; }
   .item-remove { min-width: 48px; min-height: 48px; display: inline-flex; align-items: center; justify-content: center; }
   .line-item label { font-size: 11px; }
   label:has(> input[type="checkbox"]) { min-height: 48px; }

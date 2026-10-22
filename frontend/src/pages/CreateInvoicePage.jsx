@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
+import OnboardingGuide from "../components/OnboardingGuide";
 import ThemeToggle from "../components/ThemeToggle";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { rupees } from "../lib/format";
@@ -178,6 +179,8 @@ export default function CreateInvoicePage() {
           </h1>
           <p className="text-ink-soft text-sm">No signup required. Fill in the details, preview, and download your invoice.</p>
         </div>
+
+        <OnboardingGuide />
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2 space-y-1">
