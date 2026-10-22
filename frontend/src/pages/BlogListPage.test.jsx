@@ -50,7 +50,7 @@ describe("BlogListPage", () => {
   });
 
   it("exports BLOG_POSTS array", () => {
-    expect(BLOG_POSTS).toHaveLength(10);
+    expect(BLOG_POSTS).toHaveLength(13);
     expect(BLOG_POSTS[0]).toHaveProperty("slug");
     expect(BLOG_POSTS[0]).toHaveProperty("title");
   });

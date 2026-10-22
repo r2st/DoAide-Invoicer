@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import ThemeToggle from "../components/ThemeToggle";
 import { usePageTitle } from "../hooks/usePageTitle";
+import { MARKDOWN_POSTS } from "./blog/markdownPosts";
 
-export const BLOG_POSTS = [
+// Older posts are listed here with their content in BlogPostPage; new ones are Markdown files in ./blog/posts.
+const INLINE_POSTS = [
   {
     slug: "free-invoice-generator-india-2026",
     title: "Free Invoice Generator India 2026",
@@ -73,6 +75,19 @@ export const BLOG_POSTS = [
     date: "2026-10-10",
     readTime: "8 min read",
   },
+];
+
+export const BLOG_POSTS = [
+  ...MARKDOWN_POSTS.map((p) => ({
+    slug: p.slug,
+    title: p.title,
+    excerpt: p.description,
+    date: p.date,
+    readTime: p.readTime,
+    html: p.html,
+    faqs: p.faq,
+  })),
+  ...INLINE_POSTS,
 ];
 
 export default function BlogListPage() {

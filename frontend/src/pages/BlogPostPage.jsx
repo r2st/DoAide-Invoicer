@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import ThemeToggle from "../components/ThemeToggle";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { BLOG_POSTS } from "./BlogListPage";
@@ -581,7 +581,8 @@ const CONTENT = {
 export default function BlogPostPage() {
   const { slug } = useParams();
   const post = BLOG_POSTS.find((p) => p.slug === slug);
-  const content = CONTENT[slug];
+  const content = post?.html ? { faqs: post.faqs } : CONTENT[slug];
+  const navigate = useNavigate();
   const related = BLOG_POSTS.filter((p) => p.slug !== slug);
 
   usePageTitle(post?.title || "Post Not Found", post?.excerpt);
@@ -608,6 +609,15 @@ export default function BlogPostPage() {
   };
 
   const faqs = content.faqs || [];
+
+  // Keep in-app links in Markdown posts inside the SPA instead of doing a full page load.
+  const onMarkdownClick = (e) => {
+    const a = e.target.closest("a");
+    const href = a?.getAttribute("href");
+    if (!href || !href.startsWith("/") || e.metaKey || e.ctrlKey || e.shiftKey || a.target) return;
+    e.preventDefault();
+    navigate(href);
+  };
 
   return (
     <div className="min-h-screen bg-canvas">
@@ -664,6 +674,9 @@ export default function BlogPostPage() {
           </div>
         </header>
 
+        {post.html ? (
+          <div className="md-post" onClick={onMarkdownClick} dangerouslySetInnerHTML={{ __html: post.html }} />
+        ) : (
         <div className="space-y-8">
           {content.sections.map((section, i) => (
             <section key={i}>
@@ -685,6 +698,7 @@ export default function BlogPostPage() {
             </section>
           ))}
         </div>
+        )}
 
         {faqs.length > 0 && (
           <section className="mt-10">
