@@ -3,6 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import ThemeToggle from "../components/ThemeToggle";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { rupees } from "../lib/format";
+import { clearSavedBusiness, loadSavedBusiness, saveBusiness } from "../lib/invoiceDraft";
 
 function nextInvoiceNumber() {
   let seq = 1;
@@ -51,7 +52,8 @@ export default function CreateInvoicePage() {
   const [searchParams] = useSearchParams();
   const templateSlug = searchParams.get("template");
 
-  const [from, setFrom] = useState({ name: "", email: "", phone: "", address: "", gstin: "" });
+  const [saved] = useState(() => loadSavedBusiness());
+  const [from, setFrom] = useState(saved?.from || { name: "", email: "", phone: "", address: "", gstin: "" });
   const [to, setTo] = useState({ name: "", email: "", phone: "", address: "", gstin: "" });
   const [invoiceNum, setInvoiceNum] = useState("");
   const [invoiceDate, setInvoiceDate] = useState(today());
@@ -59,7 +61,8 @@ export default function CreateInvoicePage() {
   const [dueDate, setDueDate] = useState(addDays(today(), 30));
   const [items, setItems] = useState([{ ...EMPTY_ITEM }]);
   const [notes, setNotes] = useState("");
-  const [bank, setBank] = useState({ name: "", account: "", ifsc: "" });
+  const [bank, setBank] = useState(saved?.bank || { name: "", account: "", ifsc: "" });
+  const [remember, setRemember] = useState(true);
   const [showPreview, setShowPreview] = useState(false);
   const [interState, setInterState] = useState(false);
   const printRef = useRef(null);
@@ -69,6 +72,15 @@ export default function CreateInvoicePage() {
   useEffect(() => {
     setDueDate(addDays(invoiceDate, terms));
   }, [invoiceDate, terms]);
+
+  useEffect(() => {
+    if (remember) saveBusiness(from, bank);
+  }, [remember, from, bank]);
+
+  const toggleRemember = (checked) => {
+    setRemember(checked);
+    if (!checked) clearSavedBusiness();
+  };
 
   const updateFrom = (k, v) => setFrom((p) => ({ ...p, [k]: v }));
   const updateTo = (k, v) => setTo((p) => ({ ...p, [k]: v }));
@@ -195,6 +207,10 @@ export default function CreateInvoicePage() {
                     <textarea id="from-address" className="input-field" rows={2} value={from.address} onChange={(e) => updateFrom("address", e.target.value)} placeholder="Street, City, State, PIN" />
                   </Field>
                 </div>
+                <label className="sm:col-span-2 flex items-center gap-2 text-sm text-ink-soft cursor-pointer">
+                  <input type="checkbox" checked={remember} onChange={(e) => toggleRemember(e.target.checked)} className="accent-brand" />
+                  Remember my business and bank details on this device (no account needed)
+                </label>
               </div>
             </div>
 
@@ -351,8 +367,11 @@ export default function CreateInvoicePage() {
               </button>
 
               <div className="panel bg-[var(--glass-feature-bg)] border-[var(--glass-feature-border)]">
-                <p className="text-sm text-ink-soft mb-3">Want to save invoices, track payments, and manage clients?</p>
-                <Link to="/" className="btn btn-primary w-full text-sm">Sign Up Free</Link>
+                <p className="text-sm text-ink-soft mb-3">
+                  No account needed — your business details are kept on this device for next time.
+                  Sign up only if you want invoice history and payment tracking across devices.
+                </p>
+                <Link to="/#auth" className="btn btn-ghost w-full text-sm">Create an optional account</Link>
               </div>
             </div>
           </div>

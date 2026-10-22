@@ -26,7 +26,7 @@ export default function ToolsNav() {
           </Link>
         ))}
       </div>
-      <Link to="/" className="tools-nav-cta">Sign up free</Link>
+      <Link to="/create" className="tools-nav-cta">Create invoice</Link>
     </nav>
   );
 }

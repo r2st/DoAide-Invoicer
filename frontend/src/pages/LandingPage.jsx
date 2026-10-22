@@ -218,6 +218,9 @@ export default function LandingPage() {
         </div>
 
         <div className="w-full max-w-sm flex-shrink-0" id="auth">
+          <p className="text-sm text-ink-soft mb-3">
+            An account is optional. Creating, downloading and sharing invoices works without one.
+          </p>
           <AuthForm />
         </div>
       </section>

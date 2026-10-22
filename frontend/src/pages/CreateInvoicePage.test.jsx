@@ -60,9 +60,18 @@ describe("CreateInvoicePage", () => {
     expect(screen.getByText("Share on Twitter")).toBeInTheDocument();
   });
 
-  it("renders signup CTA", () => {
+  it("keeps sign-up optional", () => {
     renderCreate();
-    expect(screen.getByText("Sign Up Free")).toBeInTheDocument();
+    expect(screen.queryByText("Sign Up Free")).not.toBeInTheDocument();
+    expect(screen.getByText("Create an optional account")).toBeInTheDocument();
+  });
+
+  it("prefills the business details saved on this device", () => {
+    window.localStorage.setItem("doaide_invoicer_business", JSON.stringify({ from: { name: "Sharma Traders" }, bank: { ifsc: "SBIN0001234" } }));
+    renderCreate();
+    expect(screen.getByLabelText("Business Name")).toHaveValue("Sharma Traders");
+    expect(screen.getByLabelText("IFSC Code")).toHaveValue("SBIN0001234");
+    window.localStorage.clear();
   });
 
   it("adds a new line item when clicking add", async () => {
