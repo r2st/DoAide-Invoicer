@@ -6,9 +6,11 @@ import ThemeToggle from "./ThemeToggle";
 const LINKS = [
   { to: "/", label: "Dashboard", end: true },
   { to: "/invoices", label: "Invoices" },
+  { to: "/clients", label: "Clients" },
   { to: "/upload", label: "Upload" },
   { to: "/hsn", label: "HSN Lookup" },
   { to: "/recurring", label: "Recurring" },
+  { to: "/payments", label: "Payments" },
   { to: "/export", label: "Export" },
   { to: "/settings", label: "Settings" },
 ];

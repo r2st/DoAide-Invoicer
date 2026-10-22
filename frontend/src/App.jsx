@@ -28,6 +28,8 @@ import InvoiceNumberGeneratorPage from "./pages/InvoiceNumberGeneratorPage";
 import InvoiceValidatorPage from "./pages/InvoiceValidatorPage";
 import GstRateFinderPage from "./pages/GstRateFinderPage";
 import RecurringInvoicesPage from "./pages/RecurringInvoicesPage";
+import ClientsPage from "./pages/ClientsPage";
+import PaymentTrackingPage from "./pages/PaymentTrackingPage";
 import UploadPage from "./pages/UploadPage";
 import AuthCallbackPage from "./pages/AuthCallbackPage";
 
@@ -101,6 +103,8 @@ export default function App() {
       <Route path="/upload" element={<Protected><UploadPage /></Protected>} />
       <Route path="/hsn" element={<Protected><HsnLookupPage /></Protected>} />
       <Route path="/recurring" element={<Protected><RecurringInvoicesPage /></Protected>} />
+      <Route path="/clients" element={<Protected><ClientsPage /></Protected>} />
+      <Route path="/payments" element={<Protected><PaymentTrackingPage /></Protected>} />
       <Route path="/export" element={<Protected><ExportPage /></Protected>} />
       <Route path="/settings" element={<Protected><SettingsPage /></Protected>} />
       <Route path="/pricing" element={<PricingPage />} />
