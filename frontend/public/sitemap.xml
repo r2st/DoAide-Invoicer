@@ -35,4 +35,5 @@
   <url><loc>https://invoicer.doaide.com/sitemap</loc><priority>0.3</priority><changefreq>monthly</changefreq></url>
   <url><loc>https://invoicer.doaide.com/compare/zoho-invoice</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
   <url><loc>https://invoicer.doaide.com/blog/hsn-code-on-gst-invoice</loc><priority>0.6</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://invoicer.doaide.com/blog/gst-invoicing-small-business-india</loc><priority>0.6</priority><changefreq>monthly</changefreq></url>
 </urlset>

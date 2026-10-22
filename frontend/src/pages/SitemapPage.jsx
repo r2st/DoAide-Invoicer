@@ -28,6 +28,7 @@ const SITEMAP_ENTRIES = [
   { url: "/blog/gst-invoice-vs-regular-invoice", name: "GST vs Regular Invoice", priority: "0.6" },
   { url: "/blog/input-tax-credit-guide-india", name: "Input Tax Credit Guide", priority: "0.6" },
   { url: "/blog/invoice-payment-terms-best-practices", name: "Payment Terms Best Practices", priority: "0.6" },
+  { url: "/blog/gst-invoicing-small-business-india", name: "GST Invoicing for Small Businesses", priority: "0.6" },
   { url: "/embed", name: "Embed Widget", priority: "0.5" },
 ];
 
