@@ -7,6 +7,7 @@ const SITEMAP_ENTRIES = [
   { url: "/create", name: "Free Invoice Generator", priority: "0.9" },
   { url: "/calculator", name: "Invoice Tax Calculator", priority: "0.9" },
   { url: "/templates", name: "Invoice Templates Gallery", priority: "0.9" },
+  { url: "/compare/zoho-invoice", name: "DoAide Invoicer vs Zoho Invoice", priority: "0.8" },
   { url: "/template/standard", name: "Standard Template", priority: "0.8" },
   { url: "/template/professional", name: "Professional Template", priority: "0.8" },
   { url: "/template/minimal", name: "Minimal Template", priority: "0.8" },

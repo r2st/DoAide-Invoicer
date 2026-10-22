@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import OnboardingGuide from "../components/OnboardingGuide";
 import ThemeToggle from "../components/ThemeToggle";
@@ -6,6 +6,8 @@ import { usePageTitle } from "../hooks/usePageTitle";
 import { rupees } from "../lib/format";
 import { clearSavedBusiness, loadSavedBusiness, saveBusiness } from "../lib/invoiceDraft";
 import { canShareFile, invoiceTotals, invoiceWhatsappText, invoiceWhatsappUrl, shareInvoiceFile } from "../lib/invoiceShare";
+import { renderInvoiceHtml, TEMPLATE_SLUGS } from "../lib/invoiceTemplates";
+import { TEMPLATES } from "./TemplatesPage";
 
 function nextInvoiceNumber() {
   let seq = 1;
@@ -31,31 +33,6 @@ const PAYMENT_TERMS = [
 
 const TAX_RATES = [0, 5, 12, 18, 28];
 
-const PRINT_CSS = `
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Segoe UI', system-ui, sans-serif; color: #1a1a1d; padding: 40px; max-width: 800px; margin: 0 auto; }
-  h1 { font-size: 28px; margin-bottom: 4px; }
-  h2 { font-size: 14px; text-transform: uppercase; letter-spacing: 2px; color: #666; margin-bottom: 12px; }
-  .header { display: flex; justify-content: space-between; margin-bottom: 32px; border-bottom: 3px solid #0D9488; padding-bottom: 20px; }
-  .meta { text-align: right; }
-  .meta .inv-num { font-size: 24px; font-weight: bold; color: #0D9488; }
-  .parties { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 32px; }
-  .party p { font-size: 14px; color: #444; line-height: 1.6; }
-  .party .name { font-weight: 600; font-size: 16px; color: #1a1a1d; }
-  table { width: 100%; border-collapse: collapse; margin-bottom: 24px; }
-  th { background: #f5f5f5; text-align: left; padding: 10px 12px; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #666; border-bottom: 2px solid #ddd; }
-  td { padding: 10px 12px; font-size: 14px; border-bottom: 1px solid #eee; }
-  .amount { text-align: right; }
-  .totals { width: 300px; margin-left: auto; }
-  .totals tr td { padding: 6px 12px; }
-  .totals .grand { font-weight: bold; font-size: 18px; border-top: 2px solid #0D9488; }
-  .notes { margin-top: 32px; padding: 16px; background: #fafafa; border-radius: 8px; font-size: 13px; color: #666; }
-  .bank { margin-top: 16px; font-size: 13px; color: #666; }
-  .footer { margin-top: 40px; text-align: center; font-size: 11px; color: #999; }
-  @media print { body { padding: 20px; } .footer { display: none; } }
-  @media (max-width: 600px) { body { padding: 16px; } th, td { padding: 6px; font-size: 12px; } }
-`;
-
 const EMPTY_ITEM = { description: "", hsn: "", qty: 1, rate: 0, tax: 18 };
 
 function SectionTitle({ children }) {
@@ -78,6 +55,7 @@ export default function CreateInvoicePage() {
   );
   const [searchParams] = useSearchParams();
   const templateSlug = searchParams.get("template");
+  const [template, setTemplate] = useState(() => (TEMPLATE_SLUGS.includes(templateSlug) ? templateSlug : "standard"));
 
   const [saved] = useState(() => loadSavedBusiness());
   const [from, setFrom] = useState(saved?.from || { name: "", email: "", phone: "", address: "", gstin: "" });
@@ -90,9 +68,9 @@ export default function CreateInvoicePage() {
   const [notes, setNotes] = useState("");
   const [bank, setBank] = useState(saved?.bank || { name: "", account: "", ifsc: "" });
   const [remember, setRemember] = useState(true);
-  const [showPreview, setShowPreview] = useState(false);
   const [interState, setInterState] = useState(false);
-  const printRef = useRef(null);
+  const [placeOfSupply, setPlaceOfSupply] = useState("");
+  const [reverseCharge, setReverseCharge] = useState(false);
 
   useEffect(() => { setInvoiceNum(nextInvoiceNumber()); }, []);
 
@@ -122,11 +100,11 @@ export default function CreateInvoicePage() {
   const { subtotal, taxBreakdown, totalTax, grandTotal } = invoiceTotals(items);
 
   const invoiceData = useCallback(
-    () => ({ invoiceNum, from, to, invoiceDate, dueDate, items, interState, notes, bank }),
-    [invoiceNum, from, to, invoiceDate, dueDate, items, interState, notes, bank],
+    () => ({ invoiceNum, from, to, invoiceDate, dueDate, items, interState, notes, bank, placeOfSupply, reverseCharge }),
+    [invoiceNum, from, to, invoiceDate, dueDate, items, interState, notes, bank, placeOfSupply, reverseCharge],
   );
 
-  const invoiceDocument = () => `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${invoiceNum}</title><style>${PRINT_CSS}</style></head><body>${printRef.current?.innerHTML || ""}<div class="footer">Generated with DoAide Invoicer — invoicer.doaide.com</div></body></html>`;
+  const invoiceDocument = () => renderInvoiceHtml(template, invoiceData());
 
   // Phones get the invoice itself as a file; elsewhere the wa.me text has the full summary.
   const shareWhatsApp = async () => {
@@ -144,16 +122,32 @@ export default function CreateInvoicePage() {
     window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, "_blank", "noopener");
   };
 
+  // A hidden iframe survives popup blockers, and the document <title> (the
+  // invoice number) becomes the suggested PDF filename in the print dialog.
   const handlePrint = () => {
-    setShowPreview(true);
-    setTimeout(() => {
-      if (!printRef.current) return;
-      const win = window.open("", "_blank");
+    const iframe = document.createElement("iframe");
+    iframe.setAttribute("aria-hidden", "true");
+    iframe.style.cssText = "position:fixed;right:0;bottom:0;width:0;height:0;border:0;";
+    iframe.srcdoc = invoiceDocument();
+    iframe.onload = () => {
+      const win = iframe.contentWindow;
       if (!win) return;
-      win.document.write(invoiceDocument());
-      win.document.close();
-      setTimeout(() => win.print(), 300);
-    }, 100);
+      const cleanup = () => setTimeout(() => iframe.remove(), 500);
+      win.addEventListener("afterprint", cleanup);
+      setTimeout(cleanup, 60000);
+      setTimeout(() => {
+        win.focus();
+        win.print();
+      }, 150);
+    };
+    document.body.appendChild(iframe);
+  };
+
+  const previewInvoice = () => {
+    const win = window.open("", "_blank", "noopener");
+    if (!win) return;
+    win.document.write(invoiceDocument());
+    win.document.close();
   };
 
   return (
@@ -175,7 +169,7 @@ export default function CreateInvoicePage() {
       <div className="max-w-5xl mx-auto px-5 pb-16">
         <div className="text-center mb-8">
           <h1 className="font-display text-3xl lg:text-4xl text-ink-strong mb-2">
-            Create a Free Invoice{templateSlug ? ` — ${templateSlug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}` : ""}
+            Create a Free Invoice{template !== "standard" ? ` — ${TEMPLATES.find((t) => t.slug === template)?.name || ""}` : ""}
           </h1>
           <p className="text-ink-soft text-sm">No signup required. Fill in the details, preview, and download your invoice.</p>
         </div>
@@ -236,6 +230,16 @@ export default function CreateInvoicePage() {
 
             <div className="panel">
               <SectionTitle>Invoice Details</SectionTitle>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
+                <Field label="Template" id="inv-template">
+                  <select id="inv-template" className="input-field" value={template} onChange={(e) => setTemplate(e.target.value)}>
+                    {TEMPLATES.map((t) => <option key={t.slug} value={t.slug}>{t.name}</option>)}
+                  </select>
+                </Field>
+                <p className="text-xs text-ink-muted self-end pb-2">
+                  {TEMPLATES.find((t) => t.slug === template)?.description}
+                </p>
+              </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                 <Field label="Invoice Number" id="inv-num">
                   <input id="inv-num" className="input-field font-mono" value={invoiceNum} onChange={(e) => setInvoiceNum(e.target.value)} />
@@ -252,11 +256,22 @@ export default function CreateInvoicePage() {
                   <input id="inv-due" type="date" className="input-field" value={dueDate} onChange={(e) => setDueDate(e.target.value)} />
                 </Field>
               </div>
-              <div className="mt-3">
+              <div className="mt-3 space-y-2">
                 <label className="flex items-center gap-2 text-sm text-ink-soft cursor-pointer">
                   <input type="checkbox" checked={interState} onChange={(e) => setInterState(e.target.checked)} className="accent-brand" />
                   Inter-state supply (IGST instead of CGST + SGST)
                 </label>
+                {template === "gst-compliant" && (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                    <Field label="Place of Supply" id="inv-pos">
+                      <input id="inv-pos" className="input-field" value={placeOfSupply} onChange={(e) => setPlaceOfSupply(e.target.value)} placeholder="e.g. 27 — Maharashtra" />
+                    </Field>
+                    <label className="flex items-center gap-2 text-sm text-ink-soft cursor-pointer self-end pb-2.5">
+                      <input type="checkbox" checked={reverseCharge} onChange={(e) => setReverseCharge(e.target.checked)} className="accent-brand" />
+                      Tax payable on reverse charge
+                    </label>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -350,6 +365,10 @@ export default function CreateInvoicePage() {
                 </div>
               </div>
 
+              <button type="button" onClick={previewInvoice} className="btn btn-ghost w-full">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                Preview Invoice
+              </button>
               <button type="button" onClick={handlePrint} className="btn btn-primary w-full">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
                 Download PDF
@@ -375,84 +394,6 @@ export default function CreateInvoicePage() {
         </div>
       </div>
 
-      <div ref={printRef} style={{ position: "absolute", left: "-9999px", top: 0 }}>
-        <div style={{ maxWidth: 800, margin: "0 auto" }}>
-          <div className="header" style={{ display: "flex", justifyContent: "space-between", marginBottom: 32, borderBottom: "3px solid #0D9488", paddingBottom: 20 }}>
-            <div>
-              <h1 style={{ fontSize: 28, fontWeight: "bold", color: "#1a1a1d", marginBottom: 4 }}>{from.name || "Your Business"}</h1>
-              {from.email && <p style={{ fontSize: 13, color: "#666" }}>{from.email}</p>}
-              {from.phone && <p style={{ fontSize: 13, color: "#666" }}>{from.phone}</p>}
-              {from.address && <p style={{ fontSize: 13, color: "#666", whiteSpace: "pre-line" }}>{from.address}</p>}
-              {from.gstin && <p style={{ fontSize: 13, color: "#666" }}>GSTIN: {from.gstin}</p>}
-            </div>
-            <div style={{ textAlign: "right" }}>
-              <div style={{ fontSize: 24, fontWeight: "bold", color: "#0D9488" }}>{invoiceNum}</div>
-              <p style={{ fontSize: 13, color: "#666" }}>Date: {invoiceDate}</p>
-              <p style={{ fontSize: 13, color: "#666" }}>Due: {dueDate}</p>
-            </div>
-          </div>
-
-          <div style={{ marginBottom: 24 }}>
-            <h2 style={{ fontSize: 12, textTransform: "uppercase", letterSpacing: 2, color: "#999", marginBottom: 8 }}>Bill To</h2>
-            <p style={{ fontSize: 16, fontWeight: 600, color: "#1a1a1d" }}>{to.name || "Client Name"}</p>
-            {to.email && <p style={{ fontSize: 13, color: "#666" }}>{to.email}</p>}
-            {to.phone && <p style={{ fontSize: 13, color: "#666" }}>{to.phone}</p>}
-            {to.address && <p style={{ fontSize: 13, color: "#666", whiteSpace: "pre-line" }}>{to.address}</p>}
-            {to.gstin && <p style={{ fontSize: 13, color: "#666" }}>GSTIN: {to.gstin}</p>}
-          </div>
-
-          <table style={{ width: "100%", borderCollapse: "collapse", marginBottom: 24 }}>
-            <thead>
-              <tr>
-                <th style={{ background: "#f5f5f5", textAlign: "left", padding: "10px 12px", fontSize: 11, textTransform: "uppercase", letterSpacing: 1, color: "#666", borderBottom: "2px solid #ddd" }}>#</th>
-                <th style={{ background: "#f5f5f5", textAlign: "left", padding: "10px 12px", fontSize: 11, textTransform: "uppercase", letterSpacing: 1, color: "#666", borderBottom: "2px solid #ddd" }}>Description</th>
-                <th style={{ background: "#f5f5f5", textAlign: "left", padding: "10px 12px", fontSize: 11, textTransform: "uppercase", letterSpacing: 1, color: "#666", borderBottom: "2px solid #ddd" }}>HSN/SAC</th>
-                <th style={{ background: "#f5f5f5", textAlign: "right", padding: "10px 12px", fontSize: 11, textTransform: "uppercase", letterSpacing: 1, color: "#666", borderBottom: "2px solid #ddd" }}>Qty</th>
-                <th style={{ background: "#f5f5f5", textAlign: "right", padding: "10px 12px", fontSize: 11, textTransform: "uppercase", letterSpacing: 1, color: "#666", borderBottom: "2px solid #ddd" }}>Rate</th>
-                <th style={{ background: "#f5f5f5", textAlign: "right", padding: "10px 12px", fontSize: 11, textTransform: "uppercase", letterSpacing: 1, color: "#666", borderBottom: "2px solid #ddd" }}>Tax</th>
-                <th style={{ background: "#f5f5f5", textAlign: "right", padding: "10px 12px", fontSize: 11, textTransform: "uppercase", letterSpacing: 1, color: "#666", borderBottom: "2px solid #ddd" }}>Amount</th>
-              </tr>
-            </thead>
-            <tbody>
-              {items.map((item, i) => (
-                <tr key={i}>
-                  <td style={{ padding: "10px 12px", fontSize: 14, borderBottom: "1px solid #eee" }}>{i + 1}</td>
-                  <td style={{ padding: "10px 12px", fontSize: 14, borderBottom: "1px solid #eee" }}>{item.description || "—"}</td>
-                  <td style={{ padding: "10px 12px", fontSize: 14, borderBottom: "1px solid #eee" }}>{item.hsn || "—"}</td>
-                  <td style={{ padding: "10px 12px", fontSize: 14, borderBottom: "1px solid #eee", textAlign: "right" }}>{item.qty}</td>
-                  <td style={{ padding: "10px 12px", fontSize: 14, borderBottom: "1px solid #eee", textAlign: "right" }}>{rupees(item.rate)}</td>
-                  <td style={{ padding: "10px 12px", fontSize: 14, borderBottom: "1px solid #eee", textAlign: "right" }}>{item.tax}%</td>
-                  <td style={{ padding: "10px 12px", fontSize: 14, borderBottom: "1px solid #eee", textAlign: "right" }}>{rupees(item.qty * item.rate)}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-
-          <table style={{ width: 280, marginLeft: "auto", borderCollapse: "collapse" }}>
-            <tbody>
-              <tr><td style={{ padding: "6px 12px", fontSize: 14, color: "#666" }}>Subtotal</td><td style={{ padding: "6px 12px", fontSize: 14, textAlign: "right" }}>{rupees(subtotal)}</td></tr>
-              {Object.entries(taxBreakdown).map(([rate, b]) => (
-                Number(rate) > 0 && (interState ? (
-                  <tr key={rate}><td style={{ padding: "6px 12px", fontSize: 13, color: "#888" }}>IGST @ {rate}%</td><td style={{ padding: "6px 12px", fontSize: 13, textAlign: "right" }}>{rupees(b.tax)}</td></tr>
-                ) : (
-                  <tr key={rate}><td style={{ padding: "6px 12px", fontSize: 13, color: "#888" }}>CGST @ {rate / 2}% + SGST @ {rate / 2}%</td><td style={{ padding: "6px 12px", fontSize: 13, textAlign: "right" }}>{rupees(b.tax)}</td></tr>
-                ))
-              ))}
-              <tr><td style={{ padding: "10px 12px", fontSize: 18, fontWeight: "bold", borderTop: "2px solid #0D9488" }}>Total</td><td style={{ padding: "10px 12px", fontSize: 18, fontWeight: "bold", textAlign: "right", borderTop: "2px solid #0D9488" }}>{rupees(grandTotal)}</td></tr>
-            </tbody>
-          </table>
-
-          {notes && <div style={{ marginTop: 32, padding: 16, background: "#fafafa", borderRadius: 8, fontSize: 13, color: "#666" }}><strong>Notes:</strong><br />{notes}</div>}
-          {(bank.name || bank.account) && (
-            <div style={{ marginTop: 16, fontSize: 13, color: "#666" }}>
-              <strong>Bank Details:</strong><br />
-              {bank.name && <span>Bank: {bank.name}<br /></span>}
-              {bank.account && <span>A/C: {bank.account}<br /></span>}
-              {bank.ifsc && <span>IFSC: {bank.ifsc}</span>}
-            </div>
-          )}
-        </div>
-      </div>
     </div>
   );
 }

@@ -302,6 +302,7 @@ export default function LandingPage() {
                 <Link to="/pricing" className="text-xs text-ink-soft hover:text-brand transition-colors">Pricing</Link>
                 <Link to="/embed" className="text-xs text-ink-soft hover:text-brand transition-colors">Embed Widget</Link>
                 <Link to="/blog/gst-invoice-format-guide" className="text-xs text-ink-soft hover:text-brand transition-colors">GST Invoice Guide</Link>
+                <Link to="/compare/zoho-invoice" className="text-xs text-ink-soft hover:text-brand transition-colors">vs Zoho Invoice</Link>
                 <Link to="/blog/how-to-send-invoices-india" className="text-xs text-ink-soft hover:text-brand transition-colors">Sending Invoices Guide</Link>
                 <Link to="/sitemap" className="text-xs text-ink-soft hover:text-brand transition-colors">Sitemap</Link>
               </div>

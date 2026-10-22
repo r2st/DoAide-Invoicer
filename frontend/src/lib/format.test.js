@@ -1,4 +1,4 @@
-import { dateLabel, rupees, rupeesShort, statusLabel, statusTone, timeAgo } from "./format";
+import { amountInWords, dateLabel, rupees, rupeesShort, statusLabel, statusTone, timeAgo } from "./format";
 
 describe("rupees", () => {
   it("formats Indian currency", () => {
@@ -61,5 +61,24 @@ describe("statusTone", () => {
 describe("timeAgo", () => {
   it("returns empty for falsy input", () => {
     expect(timeAgo(null)).toBe("");
+  });
+});
+
+describe("amountInWords", () => {
+  it("handles zero", () => {
+    expect(amountInWords(0)).toBe("Zero Rupees Only");
+  });
+  it("converts plain amounts", () => {
+    expect(amountInWords(29500)).toBe("Twenty Nine Thousand Five Hundred Rupees Only");
+  });
+  it("uses Indian lakh/crore grouping", () => {
+    expect(amountInWords(12345678)).toBe("One Crore Twenty Three Lakh Forty Five Thousand Six Hundred Seventy Eight Rupees Only");
+  });
+  it("includes paise", () => {
+    expect(amountInWords(150.75)).toBe("One Hundred Fifty Rupees and Seventy Five Paise Only");
+  });
+  it("returns empty for invalid input", () => {
+    expect(amountInWords(-5)).toBe("");
+    expect(amountInWords(NaN)).toBe("");
   });
 });

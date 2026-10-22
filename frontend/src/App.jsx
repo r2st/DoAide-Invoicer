@@ -7,6 +7,7 @@ import { useAuth } from "./hooks/useAuth";
 import BlogListPage from "./pages/BlogListPage";
 import BlogPostPage from "./pages/BlogPostPage";
 import CalculatorPage from "./pages/CalculatorPage";
+import CompareZohoPage from "./pages/CompareZohoPage";
 import CreateInvoicePage from "./pages/CreateInvoicePage";
 import DashboardPage from "./pages/DashboardPage";
 import EmbedPage from "./pages/EmbedPage";
@@ -88,6 +89,7 @@ export default function App() {
       <Route path="/tools/gst-rate-finder" element={<GstRateFinderPage />} />
 
       {/* SEO & content pages */}
+      <Route path="/compare/zoho-invoice" element={<CompareZohoPage />} />
       <Route path="/blog" element={<BlogListPage />} />
       <Route path="/blog/:slug" element={<BlogPostPage />} />
       <Route path="/embed" element={<EmbedPage />} />
