@@ -261,7 +261,7 @@ export default function CreateInvoicePage() {
               <SectionTitle>Line Items</SectionTitle>
               <div className="space-y-3">
                 {items.map((item, i) => (
-                  <div key={i} className="grid grid-cols-12 gap-2 items-end">
+                  <div key={i} className="line-item grid grid-cols-12 gap-2 items-end">
                     <div className="col-span-12 sm:col-span-4">
                       <label className="text-[9px] font-mono uppercase tracking-widest text-ink-muted block mb-1">Description</label>
                       <input className="input-field text-sm" value={item.description} onChange={(e) => updateItem(i, "description", e.target.value)} placeholder="Item or service" />
@@ -285,7 +285,7 @@ export default function CreateInvoicePage() {
                       </select>
                     </div>
                     <div className="col-span-1 flex items-end justify-end pb-2.5">
-                      <button type="button" onClick={() => removeItem(i)} className="text-bad hover:text-red-400 text-lg bg-transparent border-0 cursor-pointer" title="Remove item" disabled={items.length === 1}>&times;</button>
+                      <button type="button" onClick={() => removeItem(i)} className="item-remove text-bad hover:text-red-400 text-lg bg-transparent border-0 cursor-pointer" title="Remove item" aria-label={`Remove item ${i + 1}`} disabled={items.length === 1}>&times;</button>
                     </div>
                     <div className="col-span-12 text-right text-sm font-mono text-ink-soft -mt-1">
                       {rupees(item.qty * item.rate)}
