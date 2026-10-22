@@ -8,7 +8,10 @@ export default function TemplateDetailPage() {
   const template = TEMPLATES.find((t) => t.slug === slug);
   const related = TEMPLATES.filter((t) => t.slug !== slug).slice(0, 3);
 
-  usePageTitle(template ? `${template.name} Invoice Template` : "Template Not Found");
+  usePageTitle(
+    template ? `${template.name} Invoice Template` : "Template Not Found",
+    template && `Free ${template.name} invoice template for Indian businesses. ${template.description} Fill in your details and download a PDF.`,
+  );
 
   if (!template) {
     return (

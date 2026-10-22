@@ -44,7 +44,10 @@ function Field({ label, id, children }) {
 }
 
 export default function CreateInvoicePage() {
-  usePageTitle("Create Free Invoice");
+  usePageTitle(
+    "Create Free Invoice",
+    "Create a GST-compliant invoice online in about 30 seconds. Add your business and line items, then download a PDF or share it on WhatsApp. Free, no sign-up.",
+  );
   const [searchParams] = useSearchParams();
   const templateSlug = searchParams.get("template");
 

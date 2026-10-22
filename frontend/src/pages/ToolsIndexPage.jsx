@@ -14,7 +14,10 @@ const TOOLS = [
 ];
 
 export default function ToolsIndexPage() {
-  usePageTitle("Free Invoice Tools — No Sign-up Required");
+  usePageTitle(
+    "Free Invoice Tools — No Sign-up Required",
+    "Free invoicing tools for Indian businesses: GST rate finder, invoice validator, invoice number generator, payment terms and late fee calculators.",
+  );
   return (
     <div className="tool-page">
       <ToolsNav />

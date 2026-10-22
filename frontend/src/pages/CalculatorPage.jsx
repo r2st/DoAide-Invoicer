@@ -22,7 +22,10 @@ const GST_REFERENCE = [
 ];
 
 export default function CalculatorPage() {
-  usePageTitle("Invoice Tax Calculator");
+  usePageTitle(
+    "Invoice Tax Calculator",
+    "Calculate GST on an invoice: add or remove CGST, SGST and IGST at any rate and see the taxable value, tax and total. Free, no sign-up.",
+  );
   const [items, setItems] = useState([{ ...EMPTY_ITEM }]);
   const [interState, setInterState] = useState(false);
   const [inclusive, setInclusive] = useState(false);

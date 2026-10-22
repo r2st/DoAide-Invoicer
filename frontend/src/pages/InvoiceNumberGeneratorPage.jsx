@@ -73,7 +73,10 @@ const FAQ_ITEMS = [
 ];
 
 export default function InvoiceNumberGeneratorPage() {
-  usePageTitle("Invoice Number Generator — Free GST-Compliant Tool");
+  usePageTitle(
+    "Invoice Number Generator — Free GST-Compliant Tool",
+    "Generate sequential, GST-compliant invoice numbers with your own prefix and financial-year format. Free invoice number generator.",
+  );
   const [prefix, setPrefix] = useState("INV");
   const [fyStart, setFyStart] = useState(CURRENT_FY_START);
   const [startNum, setStartNum] = useState(1);

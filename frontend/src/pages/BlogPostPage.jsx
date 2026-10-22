@@ -584,7 +584,7 @@ export default function BlogPostPage() {
   const content = CONTENT[slug];
   const related = BLOG_POSTS.filter((p) => p.slug !== slug);
 
-  usePageTitle(post?.title || "Post Not Found");
+  usePageTitle(post?.title || "Post Not Found", post?.excerpt);
 
   if (!post || !content) {
     return (

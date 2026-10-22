@@ -31,7 +31,10 @@ const SIZES = {
 };
 
 export default function EmbedPage() {
-  usePageTitle("Embed Invoice Widget");
+  usePageTitle(
+    "Embed Invoice Widget",
+    "Add a free GST invoice generator widget to your website with one snippet, so your visitors can create and download invoices.",
+  );
   const [buttonText, setButtonText] = useState("Create Free Invoice");
   const [style, setStyle] = useState("primary");
   const [size, setSize] = useState("medium");

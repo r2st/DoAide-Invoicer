@@ -91,7 +91,10 @@ const FAQ_ITEMS = [
 ];
 
 export default function InvoiceValidatorPage() {
-  usePageTitle("GST Invoice Validator — Free Compliance Check");
+  usePageTitle(
+    "GST Invoice Validator — Free Compliance Check",
+    "Check whether an invoice has every field GST rules require: GSTIN, HSN/SAC, place of supply, tax breakup and more. Free compliance check.",
+  );
   const [invoiceNumber, setInvoiceNumber] = useState("");
   const [invoiceDate, setInvoiceDate] = useState(new Date().toISOString().slice(0, 10));
   const [sellerGstin, setSellerGstin] = useState("");

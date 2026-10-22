@@ -31,7 +31,10 @@ const SITEMAP_ENTRIES = [
 ];
 
 export default function SitemapPage() {
-  usePageTitle("Sitemap");
+  usePageTitle(
+    "Sitemap",
+    "Every page on DoAide Invoicer: invoice templates, GST tools, calculators and guides for Indian businesses.",
+  );
 
   return (
     <div className="min-h-screen bg-canvas">

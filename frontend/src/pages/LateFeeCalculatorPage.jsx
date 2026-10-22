@@ -11,7 +11,10 @@ const METHODS = [
 ];
 
 export default function LateFeeCalculatorPage() {
-  usePageTitle("Late Fee Calculator");
+  usePageTitle(
+    "Late Fee Calculator",
+    "Work out late payment fees and interest on overdue invoices by amount, rate and days overdue. Free late fee calculator for Indian businesses.",
+  );
   const [invoiceAmount, setInvoiceAmount] = useState("50000");
   const [dueDate, setDueDate] = useState("2026-09-01");
   const [payDate, setPayDate] = useState("2026-10-03");

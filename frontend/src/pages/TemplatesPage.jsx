@@ -114,7 +114,10 @@ function TemplateSvg({ template, size = 180 }) {
 }
 
 export default function TemplatesPage() {
-  usePageTitle("Invoice Templates");
+  usePageTitle(
+    "Invoice Templates",
+    "Six free invoice templates for Indian businesses, including GST-compliant and international formats. Fill in your details and download a PDF.",
+  );
 
   return (
     <div className="min-h-screen bg-canvas">

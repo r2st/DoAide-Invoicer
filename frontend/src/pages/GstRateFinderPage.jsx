@@ -148,7 +148,10 @@ function RateBadge({ rate }) {
 }
 
 export default function GstRateFinderPage() {
-  usePageTitle("GST Rate Finder — Find GST Rate & HSN/SAC Code");
+  usePageTitle(
+    "GST Rate Finder — Find GST Rate & HSN/SAC Code",
+    "Look up the GST rate and HSN or SAC code for goods and services in India. Search by product or service name. Free GST rate finder.",
+  );
   const [query, setQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
 

@@ -13,7 +13,10 @@ const STANDARD_TERMS = [
 ];
 
 export default function PaymentTermsPage() {
-  usePageTitle("Payment Terms Calculator");
+  usePageTitle(
+    "Payment Terms Calculator",
+    "Calculate invoice due dates for Net 15, Net 30, Net 60 and custom payment terms, with early-payment discounts. Free payment terms calculator.",
+  );
   const [invoiceDate, setInvoiceDate] = useState(new Date().toISOString().slice(0, 10));
   const [netDays, setNetDays] = useState(30);
   const [amount, setAmount] = useState("10000");

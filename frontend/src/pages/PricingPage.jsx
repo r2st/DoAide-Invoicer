@@ -80,7 +80,10 @@ function loadRazorpayScript() {
 }
 
 export default function PricingPage() {
-  usePageTitle("Pricing");
+  usePageTitle(
+    "Pricing",
+    "DoAide Invoicer pricing: free invoice creation, templates and GST tools, plus paid plans for invoice processing, exports and recurring invoices.",
+  );
   const auth = useAuth();
   const user = auth?.user ?? null;
   const [loading, setLoading] = useState(null);

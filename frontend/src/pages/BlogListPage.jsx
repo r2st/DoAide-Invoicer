@@ -76,7 +76,10 @@ export const BLOG_POSTS = [
 ];
 
 export default function BlogListPage() {
-  usePageTitle("Blog");
+  usePageTitle(
+    "Blog",
+    "Guides to GST invoicing for Indian businesses: invoice formats, e-invoicing, input tax credit, payment terms, and proforma vs tax invoices.",
+  );
 
   return (
     <div className="min-h-screen bg-canvas">
